@@ -1,7 +1,9 @@
 package com.svalero.cesped;
 
+import com.svalero.cesped.dao.ClientDao;
 import com.svalero.cesped.dao.Database;
 import com.svalero.cesped.dao.ProductDao;
+import com.svalero.cesped.domain.Client;
 import com.svalero.cesped.domain.Product;
 
 import java.sql.Connection;
@@ -72,7 +74,7 @@ public class Menu {
                     modifyClient();
                     break;
                 case "10":
-                    showCliente();
+                    showClient();
                     break;
             }
         } while (!choice.equals("10"));
@@ -135,14 +137,29 @@ public class Menu {
     }
 
     private void addClient() {
+        System.out.println("Nombre: ");
+        String name = keyboard.nextLine();
+        System.out.println("Apellidos ");
+        String surname = keyboard.nextLine();
+        System.out.println("DNI: ");
+        String dni = keyboard.nextLine();
+        System.out.println("Telefono: ");
+        String phone = keyboard.nextLine();
+        System.out.println("E-mail: ");
+        String email = keyboard.nextLine();
+        Client client = new Client(name.trim(), surname.trim(), dni.trim(), phone.trim(), email.trim());
 
+        ClientDao clientDao = new ClientDao(connection);
+        clientDao.addClient((client));
+        System.out.println("El cliente se ha añadido correctamente");
     }
+
 
     private void modifyClient() {
 
     }
 
-    private void showCliente() {
+    private void showClient() {
 
     }
 

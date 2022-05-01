@@ -2,15 +2,15 @@ package com.svalero.cesped.domain;
 
 public class Client {
 
-    private int id;
+   // private int id;
     private String name;
     private String surname;
     private String dni;
     private String phone;
     private String email;
 
-    public Client(int id, String name, String surname, String dni, String phone, String email) {
-        this.id = id;
+    public Client(String name, String surname, String dni, String phone, String email) {
+        //this.id = id;
         this.name = name;
         this.surname = surname;
         this.dni = dni;
@@ -18,13 +18,9 @@ public class Client {
         this.email = email;
     }
 
-    public int getId() {
-        return id;
-    }
+    //public int getId() {return id;}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    //public void setId(int id) {this.id = id;}
 
     public String getName() {
         return name;
