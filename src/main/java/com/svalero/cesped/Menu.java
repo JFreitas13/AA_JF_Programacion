@@ -75,7 +75,7 @@ public class Menu {
                     showCliente();
                     break;
             }
-        } while (!choice.equals("6"));
+        } while (!choice.equals("10"));
 
     }
 
@@ -114,16 +114,16 @@ public class Menu {
         System.out.println("Nombre: ");
         String name = keyboard.nextLine();
         System.out.println("Precio: ");
-        String price = keyboard.nextLine();
+        float price = Float.parseFloat(keyboard.nextLine());
         System.out.println("Stock: ");
-        String stock = keyboard.nextLine();
+        int stock = Integer.parseInt(keyboard.nextLine());
         System.out.println("Proveedor: ");
         String supplier = keyboard.nextLine();
-        //Product newProduct = new Product(name.trim(), price.trim(), stock.trim(), supplier.trim());
+        Product product = new Product(name.trim(), price, stock, supplier.trim());
 
-        //ProductDao productDao = new ProductDao(connection);
-        //productDao.addProduct(newProduct);
-        //System.out.println("El producto se ha añadido correctamente");
+        ProductDao productDao = new ProductDao(connection);
+        productDao.addProduct(product);
+        System.out.println("El producto se ha añadido correctamente");
     }
 
     private void modifyProduct() {

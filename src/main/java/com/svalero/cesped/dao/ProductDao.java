@@ -21,8 +21,8 @@ public class ProductDao {
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
-            statement.setString(2, String.valueOf(product.getPrice()));
-            statement.setString(3, String.valueOf(product.getStock()));
+            statement.setFloat(2, product.getPrice());
+            statement.setInt(3, product.getStock());
             statement.setString(4, String.valueOf(product.getSupplier()));
             statement.executeUpdate();
         } catch (SQLException sqle) {
