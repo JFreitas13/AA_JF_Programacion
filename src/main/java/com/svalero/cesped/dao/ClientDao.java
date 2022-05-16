@@ -15,9 +15,8 @@ public class ClientDao {
     }
 
     public void addClient (Client client) {
-        String sql = "INSERT INTO CLIENTES (NOMBRE, APELLIDOS, DNI, TELEFONO, EMAIL) VALUES (?, ?, ?, ?, ?)"; //todo CONFIRMAR PARAMETROS webinar 5 1:38 seguir viendo
+        String sql = "INSERT INTO CLIENTES (NOMBRE, APELLIDOS, DNI, TELEFONO, EMAIL) VALUES (?, ?, ?, ?, ?)";
 
-        //TODO TERMINAR DE AÑADIR PARAMETROS
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, client.getName());

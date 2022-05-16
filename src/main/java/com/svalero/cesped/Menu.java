@@ -35,14 +35,18 @@ public class Menu {
             System.out.println("1. Hacer pedido");
             System.out.println("2. Consultar pedido");
             System.out.println("3. Añadir proveedor");
-            System.out.println("4. Consultar proveedor");
-            System.out.println("5. Añadir producto");
-            System.out.println("6. Modificar producto");
-            System.out.println("7. Consultar producto");
-            System.out.println("8. Añadir cliente");
-            System.out.println("9. Modificar cliente");
-            System.out.println("10. Consultar cliente");
-            System.out.println("11. Salir");
+            System.out.println("4. Modificar proveedor");
+            System.out.println("5. Consultar proveedor");
+            System.out.println("6. Eliminar proveedor");
+            System.out.println("7. Añadir producto");
+            System.out.println("8. Modificar producto");
+            System.out.println("9. Consultar producto");
+            System.out.println("10. Eliminar producto");
+            System.out.println("11. Añadir cliente");
+            System.out.println("12. Modificar cliente");
+            System.out.println("13. Consultar cliente");
+            System.out.println("14. Eliminar cliente");
+            System.out.println("15. Salir");
             choice = keyboard.nextLine();
 
             switch (choice) {
@@ -56,28 +60,40 @@ public class Menu {
                     addSupplier();
                     break;
                 case "4":
-                    showSupplier();
+                    modifySupplier();
                     break;
                 case "5":
-                    addProduct();
+                    showSupplier();
                     break;
                 case "6":
-                    modifyProduct();
+                    deleteSupplier();
                     break;
                 case "7":
-                    showProduct();
+                    addProduct();
                     break;
                 case "8":
-                    addClient();
+                    modifyProduct();
                     break;
                 case "9":
-                    modifyClient();
+                    showProduct();
                     break;
                 case "10":
+                    deleteProduct();
+                    break;
+                case "11":
+                    addClient();
+                    break;
+                case "12":
+                    modifyClient();
+                    break;
+                case "13":
                     showClient();
                     break;
+                case "14":
+                    deleteClient();
+                    break;
             }
-        } while (!choice.equals("10"));
+        } while (!choice.equals("14"));
 
     }
 
@@ -108,7 +124,15 @@ public class Menu {
         float minOrder = Integer.parseInt(keyboard.nextLine());
     }
 
+    private void modifySupplier() {
+
+    }
+
     private void showSupplier() {
+
+    }
+
+    private void deleteSupplier() {
 
     }
 
@@ -133,6 +157,10 @@ public class Menu {
     }
 
     private void showProduct() {
+
+    }
+
+    private void deleteProduct() {
 
     }
 
@@ -163,5 +191,7 @@ public class Menu {
 
     }
 
+    private void deleteClient() {
+    }
 
 }

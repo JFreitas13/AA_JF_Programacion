@@ -15,9 +15,8 @@ public class ProductDao {
     }
 
     public void addProduct (Product product) {
-        String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK, ID_PROVEEDOR) VALUES (?, ?, ?, ?)"; //todo CONFIRMAR PARAMETROS webinar 5 1:38 seguir viendo
+        String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK, ID_PROVEEDOR) VALUES (?, ?, ?, ?)";
 
-        //TODO TERMINAR DE AÑADIR PARAMETROS
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
