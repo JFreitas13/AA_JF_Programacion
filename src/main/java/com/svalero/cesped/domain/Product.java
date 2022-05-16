@@ -5,10 +5,10 @@ public class Product {
     //private int id;
     private String name;
     private float price;
-    private float stock;
-    private Supplier supplier;
+    private int stock;
+    private String supplier;
 
-    public Product() {
+    public Product(String name, float price, int stock, String supplier) {
         //this.id = id;
         this.name = name;
         this.price = price;
@@ -41,18 +41,18 @@ public class Product {
     }
 
     public int getStock() {
-        return (int) stock;
+        return stock;
     }
 
     public void setStock(int stock) {
         this.stock = stock;
     }
 
-    public Supplier getSupplier() {
+    public String getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(Supplier supplier) {
+    public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
 }
