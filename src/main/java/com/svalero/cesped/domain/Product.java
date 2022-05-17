@@ -2,7 +2,7 @@ package com.svalero.cesped.domain;
 
 public class Product {
 
-    //private int id;
+    private int id;
     private String name;
     private float price;
     private int stock;
@@ -16,13 +16,13 @@ public class Product {
         this.supplier = supplier;
     }
 
-    //public int getId() {
-    //    return id;
-   // }
+    public int getId() {
+        return id;
+    }
 
-    //public void setId(int id) {
-    //    this.id = id;
-   // }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

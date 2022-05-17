@@ -1,20 +1,20 @@
 package com.svalero.cesped;
 
-import com.svalero.cesped.dao.ClientDao;
-import com.svalero.cesped.dao.Database;
-import com.svalero.cesped.dao.ProductDao;
+import com.svalero.cesped.dao.*;
 import com.svalero.cesped.domain.Client;
 import com.svalero.cesped.domain.Product;
+import com.svalero.cesped.domain.Supplier;
 
 import java.sql.Connection;
-import java.util.Arrays;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
 
     private Scanner keyboard;
     private Database database;
-    private Connection connection; //TODO
+    private Connection connection;
 
 
     public Menu() {
@@ -98,6 +98,8 @@ public class Menu {
     }
 
     private void addOrder() {
+        OrderDao orderDao = new OrderDao(connection);
+
         System.out.println("Nombre y apellidos: ");
         String name = keyboard.nextLine();
         System.out.println("DNI: ");
@@ -116,19 +118,54 @@ public class Menu {
         String name = keyboard.nextLine();
         System.out.println("CIF: ");
         String cif = keyboard.nextLine();
-        System.out.println("País: ");
-        String country = keyboard.nextLine();
-        System.out.println("Unidades mínimas por pedido: ");
-        int minCuantity = Integer.parseInt(keyboard.nextLine());
-        System.out.println("Valor mínimo por pedido (en €): ");
-        float minOrder = Integer.parseInt(keyboard.nextLine());
+        System.out.println("Telefono: ");
+        String phone = keyboard.nextLine();
+        System.out.println("E-mail: ");
+        String email = keyboard.nextLine();
+        Supplier supplier = new Supplier(name.trim(), cif.trim(), phone.trim(), email.trim()); //crear el nuevo objeto proveedor con los datos introducidos
+
+        SupplierDao supplierDao = new SupplierDao(connection); //dar de alta en BBDD
+        supplierDao.addSupplier(supplier);
+        System.out.println("El proveedor se ha añadido correctamente");
+
     }
 
     private void modifySupplier() {
+        SupplierDao supplierDao = new SupplierDao(connection);
+        Supplier supplier = new Supplier("b", "12345678Y", "61541408", "j@jk.com");
 
+        System.out.println("Introduce el ID del proveedor que deseas moficiar: ");
+        String idSupplier = keyboard.nextLine();
+        addSupplier();
+
+        try {
+            supplierDao.findByCif(Integer.parseInt(idSupplier));
+
+            boolean modified = supplierDao.modify(idSupplier, supplier);
+            if (modified) {
+                System.out.println("Proveedor modificado correctamente");
+            } else {
+                System.out.println("No ha sido posible modificar el proveedor. Intentalo más tarde.");
+            }
+        } catch (SQLException sqle) {
+            System.out.println("Error de conexión. Verifica que los datos son correctos.");
+            sqle.printStackTrace();
+        }
     }
 
     private void showSupplier() {
+        SupplierDao supplierDao = new SupplierDao(connection);
+
+        System.out.println("Lista de proveedores");
+        try {
+            ArrayList<Supplier> suppliers = supplierDao.findAll();
+            for (Supplier supplier : suppliers) {
+                System.out.println(supplier.getId() + " | " + supplier.getName() + " | " + supplier.getCif() + " | " + supplier.getPhone() + " | " + supplier.getEmail());
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Error de conexión. Verifica que los datos son correctos.");
+            sqlException.printStackTrace();
+        }
 
     }
 

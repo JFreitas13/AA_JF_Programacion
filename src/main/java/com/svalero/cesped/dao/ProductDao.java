@@ -30,15 +30,30 @@ public class ProductDao {
         }
     }
 
-    public void modifyProduct() {
+    public boolean modifyProduct(String name, Product product) throws SQLException {
+        String sql = "UPDATE PRODUCTOS INTO NOMBRE = ?, PRECIO = ?, STOCK = ?, ID_PROVEEDOR = ?";
 
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, product.getName());
+        statement.setFloat(2, product.getPrice());
+        statement.setInt(3, product.getStock());
+        statement.setString(4, String.valueOf(product.getSupplier()));
+        int rows = statement.executeUpdate();
+
+        return rows == 1;
     }
 
-    public void deleteProduct() {
+    public boolean deleteProduct(String name) throws SQLException {
+        String sql = "DELETE FROM PRODUCTOS WHERE NOMBRE = ?";
 
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, name);
+        int rows = statement.executeUpdate();
+
+        return rows == 1;
     }
 
-    public void findAllProduct() {
+    public void showProduct() {
 
     }
 
