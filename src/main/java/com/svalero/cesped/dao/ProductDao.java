@@ -4,7 +4,9 @@ import com.svalero.cesped.domain.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ProductDao {
 
@@ -14,7 +16,7 @@ public class ProductDao {
         this.connection = connection;
     }
 
-    public void addProduct (Product product) throws SQLException{
+    public void addProduct(Product product) throws SQLException{
         String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK, ID_PROVEEDOR) VALUES (?, ?, ?, ?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -49,8 +51,23 @@ public class ProductDao {
         return rows == 1;
     }
 
-    public void showProduct() {
+    //listar todos los productos
+    public ArrayList<Product> findAllProduct() throws SQLException {
+        String sql = "SELECT * FROM PRODUCTOS";
+        ArrayList<Product> products = new ArrayList<>();
 
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            Product product = new Product();
+            product.setId(Integer.parseInt(resultSet.getString("ID_PRODUCTO")));
+            product.setName(resultSet.getString("NOMBRE"));
+            product.setPrice(Float.parseFloat(resultSet.getString("PRECIO")));
+            product.setStock(Integer.parseInt(resultSet.getString("STOCK")));
+            product.setSupplier(resultSet.getString("ID_PROVEEDOR"));
+            products.add(product);
+        }
+        return products;
     }
 
     public void findOneProduct() {

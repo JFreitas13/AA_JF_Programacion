@@ -18,7 +18,7 @@ public class ClientDao {
         this.connection = connection;
     }
 
-    public void addClient(Client client) throws SQLException, ClientAlreadyExistException { //paso la excepción al menu con throws
+    public void addClient(Client client) throws SQLException, ClientAlreadyExistException { //paso la excepción al menu con throws y que uso tb la de que ya existe el cliente
         if (existClient(client.getDni()))
             throw new ClientAlreadyExistException();
 
@@ -76,6 +76,8 @@ public class ClientDao {
         return clients;
     }
 
+    //nullPointException - referencia un objecto que esta null. Si un objecto no se instancia sale null
+    //Optional para objetos que pueeden ser nulos
     public Optional<Client> findByDni(String dni) throws SQLException {
         String sql = "SELECT * FROM CLIENTES WHERE DNI = ?";
         Client client = null;
@@ -95,7 +97,7 @@ public class ClientDao {
         return  Optional.ofNullable(client);
     }
 
-    private boolean existClient(String dni) throws SQLException {
+    private boolean existClient(String dni) throws SQLException { //private porque es para uso interno
         Optional<Client> client = findByDni(dni);
         return client.isPresent();
     }

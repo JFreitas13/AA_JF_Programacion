@@ -127,7 +127,11 @@ public class Menu {
         Supplier supplier = new Supplier(name.trim(), cif.trim(), phone.trim(), email.trim()); //crear el nuevo objeto proveedor con los datos introducidos
 
         SupplierDao supplierDao = new SupplierDao(connection); //dar de alta en BBDD
-        supplierDao.addSupplier(supplier);
+        try {
+            supplierDao.addSupplier(supplier);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println("El proveedor se ha añadido correctamente");
 
     }
@@ -226,9 +230,12 @@ public class Menu {
         try {
             clientDao.addClient((client));
             System.out.println("El cliente se ha añadido correctamente.");
-        } catch (ClientAlreadyExistException | SQLException caee) {
-            System.out.println("No se ha podido añadir el cliente. Intentalo más tarde");
+        } catch (ClientAlreadyExistException caee){
+            System.out.println(caee.getMessage()); //coge mensaje personalizado de la excepcion
             caee.printStackTrace(); // quitar de la version final. Sirve para ver la traza de la excepcion
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido añadir el cliente. Intentalo más tarde");
+            sqle.printStackTrace(); // quitar de la version final. Sirve para ver la traza de la excepcion
         }
     }
 

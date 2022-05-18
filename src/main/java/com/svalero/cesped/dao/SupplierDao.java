@@ -17,19 +17,16 @@ public class SupplierDao {
     }
 
     //añadir proveedor
-    public void addSupplier (Supplier supplier) {
+    public void addSupplier (Supplier supplier) throws SQLException {
         String sql = "INSERT INTO PROVEEDORES (NOMBRE, CIF, TELEFONO, EMAIL) VALUES (?, ?, ?, ?)";
 
-        try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, supplier.getName());
             statement.setString(2, supplier.getCif());
             statement.setString(3, supplier.getPhone());
             statement.setString(4, supplier.getEmail());
             statement.executeUpdate();
-        } catch (SQLException sqle) {
-            System.out.println("Error BBDD al añadir proveedor");
-            sqle.printStackTrace();
+
         }
     }
     //lista de todos los proveerdores
