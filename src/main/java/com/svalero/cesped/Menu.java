@@ -5,6 +5,7 @@ import com.svalero.cesped.domain.Client;
 import com.svalero.cesped.domain.Product;
 import com.svalero.cesped.domain.Supplier;
 import com.svalero.cesped.exception.ClientAlreadyExistException;
+import com.svalero.cesped.exception.SupplierAlreadyExistException;
 
 import java.awt.*;
 import java.sql.Connection;
@@ -108,7 +109,6 @@ public class Menu {
         String dni = keyboard.nextLine();
         System.out.println("Metros: ");
         int quantity = Integer.parseInt(keyboard.nextLine());
-
     }
 
     private void showOrder(){
@@ -116,6 +116,8 @@ public class Menu {
         }
 
     private void addSupplier() {
+        SupplierDao supplierDao = new SupplierDao(connection); //dar de alta en BBDD
+
         System.out.println("Nombre Comercial: ");
         String name = keyboard.nextLine();
         System.out.println("CIF: ");
@@ -126,16 +128,19 @@ public class Menu {
         String email = keyboard.nextLine();
         Supplier supplier = new Supplier(name.trim(), cif.trim(), phone.trim(), email.trim()); //crear el nuevo objeto proveedor con los datos introducidos
 
-        SupplierDao supplierDao = new SupplierDao(connection); //dar de alta en BBDD
         try {
             supplierDao.addSupplier(supplier);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Rl proveedor se ha añadido correctamente");
+        } catch (SupplierAlreadyExistException saee) {
+            System.out.println(saee.getMessage());
+            saee.printStackTrace(); //borrar de la version final
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido añadir el proveedor. Intentalo más tarde.");
+            sqle.printStackTrace(); //borrar de la version final
         }
-        System.out.println("El proveedor se ha añadido correctamente");
-
     }
 
+    //REVISAR
     private void modifySupplier() {
         SupplierDao supplierDao = new SupplierDao(connection);
         Supplier supplier = new Supplier("b", "12345678Y", "61541408", "j@jk.com");
@@ -147,7 +152,7 @@ public class Menu {
         try {
             supplierDao.findByCif(Integer.parseInt(idSupplier));
 
-            boolean modified = supplierDao.modify(idSupplier, supplier);
+            boolean modified = supplierDao.modifySupplier(idSupplier, supplier);
             if (modified) {
                 System.out.println("Proveedor modificado correctamente");
             } else {
@@ -164,19 +169,29 @@ public class Menu {
 
         System.out.println("Lista de proveedores");
         try {
-            ArrayList<Supplier> suppliers = supplierDao.findAll();
+            ArrayList<Supplier> suppliers = supplierDao.findAllSupplier();
             for (Supplier supplier : suppliers) {
                 System.out.println(supplier.getId() + " | " + supplier.getName() + " | " + supplier.getCif() + " | " + supplier.getPhone() + " | " + supplier.getEmail());
             }
         } catch (SQLException sqlException) {
             System.out.println("Error de conexión. Verifica que los datos son correctos.");
-            sqlException.printStackTrace();
+            sqlException.printStackTrace(); //quitar de la version final
         }
-
     }
 
     private void deleteSupplier() {
-
+        System.out.println("Indicar CIF del proveedor a eliminar: ");
+        String cif = keyboard.nextLine();
+        SupplierDao supplierDao = new SupplierDao(connection);
+        try {
+            boolean deleted = supplierDao.deleteSupplier(cif);
+            if (deleted)
+                System.out.println("El proveedor se ha eliminado correctamente");
+            else
+                System.out.println("El proveedor no se ha podido eliminar o no existe");
+        } catch (SQLException sqle) {
+            System.out.println("Error de conexión. Verifica que los datos son correctos.");
+        }
     }
 
     private void addProduct() {
@@ -204,11 +219,35 @@ public class Menu {
     }
 
     private void showProduct() {
+        ProductDao productDao = new ProductDao(connection);
+
+        System.out.println("Lista de productos");
+        try {
+            ArrayList<Product> products = productDao.findAllProduct();
+            for (Product product : products) {
+                System.out.println(product.getId() + " | " + product.getName() + " | " + product.getPrice() + " | " + product.getStock()+ " | " + product.getSupplier());
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Error de conexión. Verifica que los datos son correctos.");
+            sqlException.printStackTrace(); //quitar de la version final
+        }
 
     }
 
+    //rehacer con id
     private void deleteProduct() {
-
+        System.out.println("Indicar nombre del producto a eliminar: ");
+        String name = keyboard.nextLine();
+        ProductDao productDao = new ProductDao(connection);
+        try {
+            boolean deleted = productDao.deleteProduct(name);
+            if (deleted)
+                System.out.println("El producto se ha eliminado correctamente");
+            else
+                System.out.println("El producto no se ha podido eliminar o no existe");
+        } catch (SQLException sqle) {
+            System.out.println("Error de conexión. Verifica que los datos son correctos.");
+        }
     }
 
     private void addClient() {
@@ -245,10 +284,33 @@ public class Menu {
     }
 
     private void showClient() {
+        ClientDao clientDao = new ClientDao(connection);
 
+        System.out.println("Lista de clientes");
+        try {
+            ArrayList<Client> clients = clientDao.findAllClient();
+            for (Client client : clients) {
+                System.out.println(client.getId() + " | " + client.getName() + " | " + client.getSurname() + " | " + client.getDni() + " | " + client.getPhone() + " | " + client.getEmail());
+            }
+        } catch (SQLException sqlException) {
+            System.out.println("Error de conexión. Verifica que los datos son correctos.");
+            sqlException.printStackTrace(); //quitar de la version final
+        }
     }
 
+    //rehacer con id
     private void deleteClient() {
+        System.out.println("Indicar DNI del cliente a eliminar: ");
+        String dni = keyboard.nextLine();
+        ClientDao clientDao = new ClientDao(connection);
+        try {
+            boolean deleted = clientDao.deleteClient(dni);
+            if (deleted)
+                System.out.println("El cliente se ha eliminado correctamente");
+            else
+                System.out.println("El cliente no se ha podido eliminar o no existe");
+        } catch (SQLException sqle) {
+            System.out.println("Error de conexión. Verifica que los datos son correctos.");
+        }
     }
-
 }

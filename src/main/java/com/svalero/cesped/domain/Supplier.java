@@ -2,7 +2,7 @@ package com.svalero.cesped.domain;
 
 public class Supplier {
 
-    private String id;
+    private int id;
     private String name;
     private String cif;
     private String phone;
@@ -15,11 +15,15 @@ public class Supplier {
         this.email = email;
     }
 
-    public String getId() {
+    public Supplier() {
+
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
