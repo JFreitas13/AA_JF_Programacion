@@ -14,21 +14,17 @@ public class ProductDao {
         this.connection = connection;
     }
 
-    public void addProduct (Product product) {
+    public void addProduct (Product product) throws SQLException{
         String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK, ID_PROVEEDOR) VALUES (?, ?, ?, ?)";
 
-        try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
             statement.setFloat(2, product.getPrice());
             statement.setInt(3, product.getStock());
             statement.setString(4, String.valueOf(product.getSupplier()));
             statement.executeUpdate();
-        } catch (SQLException sqle) {
-            System.out.println("Error BBDD al añadir producto");
-            sqle.printStackTrace();
         }
-    }
+
 
     public boolean modifyProduct(String name, Product product) throws SQLException {
         String sql = "UPDATE PRODUCTOS INTO NOMBRE = ?, PRECIO = ?, STOCK = ?, ID_PROVEEDOR = ?";

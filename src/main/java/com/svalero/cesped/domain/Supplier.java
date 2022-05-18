@@ -9,7 +9,6 @@ public class Supplier {
     private String email;
 
     public Supplier(String name, String cif, String phone, String email) {
-        this.id = id;
         this.name = name;
         this.cif = cif;
         this.phone = phone;

@@ -4,7 +4,9 @@ import com.svalero.cesped.dao.*;
 import com.svalero.cesped.domain.Client;
 import com.svalero.cesped.domain.Product;
 import com.svalero.cesped.domain.Supplier;
+import com.svalero.cesped.exception.ClientAlreadyExistException;
 
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -185,8 +187,12 @@ public class Menu {
         Product product = new Product(name.trim(), price, stock, supplier.trim());
 
         ProductDao productDao = new ProductDao(connection);
-        productDao.addProduct(product);
-        System.out.println("El producto se ha añadido correctamente");
+        try {
+            productDao.addProduct(product);
+            System.out.println("El producto se ha añadido correctamente");
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido añadir el producto. Intentalo más tarde.");
+        }
     }
 
     private void modifyProduct() {
@@ -202,9 +208,11 @@ public class Menu {
     }
 
     private void addClient() {
+        ClientDao clientDao = new ClientDao(connection);
+
         System.out.println("Nombre: ");
         String name = keyboard.nextLine();
-        System.out.println("Apellidos ");
+        System.out.println("Apellidos: ");
         String surname = keyboard.nextLine();
         System.out.println("DNI: ");
         String dni = keyboard.nextLine();
@@ -214,9 +222,14 @@ public class Menu {
         String email = keyboard.nextLine();
         Client client = new Client(name.trim(), surname.trim(), dni.trim(), phone.trim(), email.trim());
 
-        ClientDao clientDao = new ClientDao(connection);
-        clientDao.addClient((client));
-        System.out.println("El cliente se ha añadido correctamente");
+
+        try {
+            clientDao.addClient((client));
+            System.out.println("El cliente se ha añadido correctamente.");
+        } catch (ClientAlreadyExistException | SQLException caee) {
+            System.out.println("No se ha podido añadir el cliente. Intentalo más tarde");
+            caee.printStackTrace(); // quitar de la version final. Sirve para ver la traza de la excepcion
+        }
     }
 
 
