@@ -7,10 +7,10 @@ import com.svalero.cesped.domain.Supplier;
 import com.svalero.cesped.exception.ClientAlreadyExistException;
 import com.svalero.cesped.exception.SupplierAlreadyExistException;
 
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -24,6 +24,7 @@ public class Menu {
         keyboard = new Scanner(System.in);
     }
 
+    //motodo para conectar a la BBDD
     public void connect() {
         database = new Database();
         connection = database.getConnection();
@@ -31,6 +32,7 @@ public class Menu {
 
     public void showMenu() {
         connect();
+
         String choice = null;
 
         do {
@@ -96,25 +98,40 @@ public class Menu {
                     deleteClient();
                     break;
             }
-        } while (!choice.equals("14"));
+        } while (!choice.equals("15"));
 
     }
 
+    //añadir pedido
     private void addOrder() {
-        OrderDao orderDao = new OrderDao(connection);
 
-        System.out.println("Nombre y apellidos: ");
-        String name = keyboard.nextLine();
-        System.out.println("DNI: ");
-        String dni = keyboard.nextLine();
-        System.out.println("Metros: ");
-        int quantity = Integer.parseInt(keyboard.nextLine());
+        System.out.println("Indica que modelos quieres comprar. Separados por comas");
+        String orderProducts = keyboard.nextLine();
+
+      try {
+            String[] productArray = orderProducts.split(","); //devuelve un array y en cada posición en un dato
+            ProductDao productDao = new ProductDao(connection);
+            List<Product> products = new ArrayList<>();
+            for (String productID: productArray) {
+                Product product = productDao.findByName(productID.trim()).get();       // TODO Faltaría mejorar esto para comprobar valores no válidos
+                products.add(product);
+            }
+
+            OrderDao orderDao = new OrderDao(connection);
+            orderDao.add();
+            System.out.println("El pedido se ha creado correctamente");
+        } catch (SQLException sqle) {
+            System.out.println("No se ha podido comunicar con la base de datos. Inténtelo de nuevo");
+            sqle.printStackTrace();
+        }
     }
 
+    //listado de pedidos
     private void showOrder(){
 
-        }
+    }
 
+    //añadir proveedor
     private void addSupplier() {
         SupplierDao supplierDao = new SupplierDao(connection); //dar de alta en BBDD
 
@@ -143,13 +160,13 @@ public class Menu {
     //REVISAR
     private void modifySupplier() {
         SupplierDao supplierDao = new SupplierDao(connection);
-        Supplier supplier = new Supplier("b", "12345678Y", "61541408", "j@jk.com");
+        Supplier supplier;
 
         System.out.println("Introduce el ID del proveedor que deseas moficiar: ");
         String idSupplier = keyboard.nextLine();
         addSupplier();
 
-        try {
+       /* try {
             supplierDao.findByCif(Integer.parseInt(idSupplier));
 
             boolean modified = supplierDao.modifySupplier(idSupplier, supplier);
@@ -161,7 +178,7 @@ public class Menu {
         } catch (SQLException sqle) {
             System.out.println("Error de conexión. Verifica que los datos son correctos.");
             sqle.printStackTrace();
-        }
+        }*/
     }
 
     private void showSupplier() {
@@ -195,7 +212,7 @@ public class Menu {
     }
 
     private void addProduct() {
-        System.out.println("Nombre: ");
+     /*   System.out.println("Nombre: ");
         String name = keyboard.nextLine();
         System.out.println("Precio: ");
         float price = Float.parseFloat(keyboard.nextLine());
@@ -203,15 +220,15 @@ public class Menu {
         int stock = Integer.parseInt(keyboard.nextLine());
         System.out.println("Proveedor: ");
         String supplier = keyboard.nextLine();
-        Product product = new Product(name.trim(), price, stock, supplier.trim());
+        Product product = new Product(name.trim(), price, stock, supplier);
 
         ProductDao productDao = new ProductDao(connection);
         try {
-            productDao.addProduct(product);
+            productDao.add(product);
             System.out.println("El producto se ha añadido correctamente");
         } catch (SQLException sqle) {
             System.out.println("No se ha podido añadir el producto. Intentalo más tarde.");
-        }
+        }*/
     }
 
     private void modifyProduct() {
@@ -223,9 +240,9 @@ public class Menu {
 
         System.out.println("Lista de productos");
         try {
-            ArrayList<Product> products = productDao.findAllProduct();
+            ArrayList<Product> products = productDao.findAll();
             for (Product product : products) {
-                System.out.println(product.getId() + " | " + product.getName() + " | " + product.getPrice() + " | " + product.getStock()+ " | " + product.getSupplier());
+                System.out.println(product.getIdProduct() + " | " + product.getName() + " | " + product.getPrice() + " | " + product.getStock()+ " | " + product.getSupplier());
             }
         } catch (SQLException sqlException) {
             System.out.println("Error de conexión. Verifica que los datos son correctos.");
@@ -240,7 +257,7 @@ public class Menu {
         String name = keyboard.nextLine();
         ProductDao productDao = new ProductDao(connection);
         try {
-            boolean deleted = productDao.deleteProduct(name);
+            boolean deleted = productDao.delete(name);
             if (deleted)
                 System.out.println("El producto se ha eliminado correctamente");
             else
@@ -290,7 +307,7 @@ public class Menu {
         try {
             ArrayList<Client> clients = clientDao.findAllClient();
             for (Client client : clients) {
-                System.out.println(client.getId() + " | " + client.getName() + " | " + client.getSurname() + " | " + client.getDni() + " | " + client.getPhone() + " | " + client.getEmail());
+                System.out.println(client.getIdClient() + " | " + client.getName() + " | " + client.getSurname() + " | " + client.getDni() + " | " + client.getPhone() + " | " + client.getEmail());
             }
         } catch (SQLException sqlException) {
             System.out.println("Error de conexión. Verifica que los datos son correctos.");

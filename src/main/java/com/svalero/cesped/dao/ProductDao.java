@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class ProductDao {
 
@@ -16,7 +17,7 @@ public class ProductDao {
         this.connection = connection;
     }
 
-    public void addProduct(Product product) throws SQLException {
+    public void add(Product product) throws SQLException {
         String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK, ID_PROVEEDOR) VALUES (?, ?, ?, ?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -25,10 +26,10 @@ public class ProductDao {
             statement.setInt(3, product.getStock());
             statement.setString(4, String.valueOf(product.getSupplier()));
             statement.executeUpdate();
-        }
+    }
 
 
-    public boolean modifyProduct(String name, Product product) throws SQLException {
+    public boolean modify(Product product) throws SQLException {
         String sql = "UPDATE PRODUCTOS INTO NOMBRE = ?, PRECIO = ?, STOCK = ?, ID_PROVEEDOR = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -41,7 +42,7 @@ public class ProductDao {
         return rows == 1;
     }
 
-    public boolean deleteProduct(String name) throws SQLException {
+    public boolean delete(String name) throws SQLException {
         String sql = "DELETE FROM PRODUCTOS WHERE NOMBRE = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -52,7 +53,7 @@ public class ProductDao {
     }
 
     //listar todos los productos
-    public ArrayList<Product> findAllProduct() throws SQLException {
+    public ArrayList<Product> findAll() throws SQLException {
         String sql = "SELECT * FROM PRODUCTOS";
         ArrayList<Product> products = new ArrayList<>();
 
@@ -60,17 +61,31 @@ public class ProductDao {
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             Product product = new Product();
-            product.setId(Integer.parseInt(resultSet.getString("ID_PRODUCTO")));
+            product.setIdProduct(Integer.parseInt(resultSet.getString("ID_PRODUCTO")));
             product.setName(resultSet.getString("NOMBRE"));
             product.setPrice(Float.parseFloat(resultSet.getString("PRECIO")));
             product.setStock(Integer.parseInt(resultSet.getString("STOCK")));
-            product.setSupplier(resultSet.getString("ID_PROVEEDOR"));
+            product.setIdSupplier(Integer.parseInt(resultSet.getString("ID_PROVEEDOR")));
             products.add(product);
         }
         return products;
     }
 
-    public void findOneProduct() {
+    public Optional<Product> findByName(String name) throws SQLException {
+        String sql = "SLECT * FROM PRODUCTOS WHERE NOMBRE = ?;";
+        Product product = null;
 
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, name);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            product = new Product();
+            product.setIdProduct(resultSet.getInt("ID_PRODUCTO"));
+            product.setName(resultSet.getString("NOMBRE"));
+            product.setPrice(resultSet.getFloat("PRECIO"));
+            product.setStock(resultSet.getInt("STOCK"));
+            product.setIdSupplier(resultSet.getInt("ID_PROVEEDOR"));
+        }
+        return Optional.ofNullable(product);
     }
 }

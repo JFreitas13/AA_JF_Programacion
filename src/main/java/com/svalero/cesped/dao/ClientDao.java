@@ -65,7 +65,7 @@ public class ClientDao {
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             Client client = new Client();
-            client.setId(Integer.parseInt(resultSet.getString("ID_CLIENTE")));
+            client.setIdClient(Integer.parseInt(resultSet.getString("ID_CLIENTE")));
             client.setName(resultSet.getString("NOMBRE"));
             client.setSurname(resultSet.getString("APELLIDOS"));
             client.setDni(resultSet.getString("DNI"));
@@ -87,7 +87,7 @@ public class ClientDao {
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             client = new Client();
-            client.setId(Integer.parseInt(resultSet.getString("ID_CLIENTE")));
+            client.setIdClient(Integer.parseInt(resultSet.getString("ID_CLIENTE")));
             client.setName(resultSet.getString("NOMBRE"));
             client.setSurname(resultSet.getString("APELLIDOS"));
             client.setDni(resultSet.getString("DNI"));
@@ -100,5 +100,25 @@ public class ClientDao {
     private boolean existClient(String dni) throws SQLException { //private porque es para uso interno
         Optional<Client> client = findByDni(dni);
         return client.isPresent();
+    }
+
+    public Optional<Client> getCliente (String phone)  throws SQLException {
+        String sql = "SELECT * FROM CLIENTES WHERE PHONE = ?";
+        Client client = null;
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, phone);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            client = new Client();
+            client.setIdClient(resultSet.getInt("ID_CLIENTE"));
+            client.setName(resultSet.getString("NOMBRE"));
+            client.setSurname(resultSet.getString("APELLIDOS"));
+            client.setDni(resultSet.getString("DNI"));
+            client.setPhone(resultSet.getString("TELEFONO"));
+            client.setEmail(resultSet.getString("EMAIL"));
+        }
+
+        return Optional.ofNullable(client);
     }
 }

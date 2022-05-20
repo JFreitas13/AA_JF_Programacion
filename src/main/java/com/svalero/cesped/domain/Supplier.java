@@ -8,15 +8,16 @@ public class Supplier {
     private String phone;
     private String email;
 
+
+    public Supplier() {
+
+    }
+
     public Supplier(String name, String cif, String phone, String email) {
         this.name = name;
         this.cif = cif;
         this.phone = phone;
         this.email = email;
-    }
-
-    public Supplier() {
-
     }
 
     public int getId() {

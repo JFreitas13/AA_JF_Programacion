@@ -1,35 +1,55 @@
 package com.svalero.cesped.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
 
-    private int idCliente;
-    private int idProducto;
+    private int idOrder;
+    //private int idClient;
+   // private int idProduct;
     private LocalDate date;
     private float cantidad;
 
+    private Client client; //objeto relacionado con el pedido
+    private List<Product> products;
+
+    public Order() {
+        products = new ArrayList<>();
+    }
+
     //TODO REVISAR CLASE ORDER
-    public Order(LocalDate date, float cantidad) {
+    public Order(LocalDate date, float cantidad, Client client) {
         this.date = date;
         this.cantidad = cantidad;
+        this.client = client;
+        products = new ArrayList<>();
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public int getIdOrder() {
+        return idOrder;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setIdOrder(int idOrder) {
+        this.idOrder = idOrder;
     }
 
-    public int getIdProducto() {
-        return idProducto;
+   /* public int getIdClient() {
+        return idClient;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
+    }*/
+
+    /*public int getIdProduct() {
+        return idProduct;
     }
+
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
+    }*/
 
     public LocalDate getDate() {
         return date;
@@ -45,5 +65,13 @@ public class Order {
 
     public void setCantidad(float cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }
