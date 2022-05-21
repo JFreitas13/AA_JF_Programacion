@@ -54,7 +54,7 @@ public class ProductDao {
 
     //listar todos los productos
     public ArrayList<Product> findAll() throws SQLException {
-        String sql = "SELECT * FROM PRODUCTOS";
+        String sql = "SELECT * FROM PRODUCTOS;";
         ArrayList<Product> products = new ArrayList<>();
 
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -65,7 +65,7 @@ public class ProductDao {
             product.setName(resultSet.getString("NOMBRE"));
             product.setPrice(Float.parseFloat(resultSet.getString("PRECIO")));
             product.setStock(Integer.parseInt(resultSet.getString("STOCK")));
-            //product.setIdSupplier(Integer.parseInt(resultSet.getString("ID_PROVEEDOR")));
+            product.setIdSupplier(resultSet.getInt("ID_PROVEEDOR"));
             products.add(product);
         }
         return products;

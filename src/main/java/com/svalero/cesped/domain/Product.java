@@ -9,7 +9,7 @@ public class Product {
     private String name;
     private float price;
     private int stock;
-    //private int idSupplier;
+    private int idSupplier;
 
     private Supplier supplier; //para relacionar con Supplier
 
@@ -59,13 +59,13 @@ public class Product {
         this.stock = stock;
     }
 
-    /*public int getIdSupplier() {
+    public int getIdSupplier() {
         return idSupplier;
     }
 
     public void setIdSupplier(int idSupplier) {
         this.idSupplier = idSupplier;
-    }*/
+    }
 
     public Supplier getSupplier() {
         return supplier;
