@@ -39,7 +39,7 @@ public class OrderDao {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, client.getIdClient());
             statement.setInt(2, product.getIdProduct());
-            statement.setDate(3, new Date(System.currentTimeMillis()));
+            statement.setDate(3, new Date(System.currentTimeMillis())); //Tema fechas en Aula abierta 7
             statement.setString(4, String.valueOf(product.getSupplier()));
             statement.setFloat(5, order.getCantidad());
             statement.executeUpdate();
