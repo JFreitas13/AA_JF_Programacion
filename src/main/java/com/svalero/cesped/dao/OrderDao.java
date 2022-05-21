@@ -45,6 +45,14 @@ public class OrderDao {
             statement.executeUpdate();
         }
     }
+
+    public void showOrder() {
+
+    }
+
+    public void modifyOrder() {
+
+    }
 }
 
     //TODO (CRUD: Create Read Update Delete)

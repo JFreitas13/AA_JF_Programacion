@@ -65,7 +65,7 @@ public class ProductDao {
             product.setName(resultSet.getString("NOMBRE"));
             product.setPrice(Float.parseFloat(resultSet.getString("PRECIO")));
             product.setStock(Integer.parseInt(resultSet.getString("STOCK")));
-            product.setIdSupplier(Integer.parseInt(resultSet.getString("ID_PROVEEDOR")));
+            //product.setIdSupplier(Integer.parseInt(resultSet.getString("ID_PROVEEDOR")));
             products.add(product);
         }
         return products;
@@ -84,7 +84,7 @@ public class ProductDao {
             product.setName(resultSet.getString("NOMBRE"));
             product.setPrice(resultSet.getFloat("PRECIO"));
             product.setStock(resultSet.getInt("STOCK"));
-            product.setIdSupplier(resultSet.getInt("ID_PROVEEDOR"));
+            //product.setIdSupplier(resultSet.getInt("ID_PROVEEDOR"));
         }
         return Optional.ofNullable(product);
     }

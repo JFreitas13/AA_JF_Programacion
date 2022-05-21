@@ -118,7 +118,7 @@ public class Menu {
             }
 
             OrderDao orderDao = new OrderDao(connection);
-            orderDao.add();
+            //orderDao.add();
             System.out.println("El pedido se ha creado correctamente");
         } catch (SQLException sqle) {
             System.out.println("No se ha podido comunicar con la base de datos. Inténtelo de nuevo");

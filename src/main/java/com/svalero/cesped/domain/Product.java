@@ -65,11 +65,11 @@ public class Product {
 
     public void setIdSupplier(int idSupplier) {
         this.idSupplier = idSupplier;
-    }
+    }*/
 
     public Supplier getSupplier() {
         return supplier;
-    }*/
+    }
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
