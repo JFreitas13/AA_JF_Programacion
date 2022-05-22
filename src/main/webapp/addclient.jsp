@@ -25,7 +25,7 @@
             $("form").on("submit", function (event) {
                 event.preventDefault();
                 var formValue = $(this).serialize();
-                $.post("add-product", formValue, function (data) { <!-- servlet que recibe todos los datos del formulario -->
+                $.post("add-client", formValue, function (data) { <!-- servlet que recibe todos los datos del formulario -->
                     $("#result").html(data); <!-- Lo usamos para enviar la respuesta al div en la misma página -->
                 });
             });
@@ -33,41 +33,35 @@
     </script>
 
     <div class="container">
-        <h2>Añadir producto</h2>
+        <h2>Añadir cliente</h2>
 
         <form>
             <div class="mb-2">
-                <label for="nombre" class="form-label">Nombre del producto</label>
+                <label for="nombre" class="form-label">Nombre</label>
                 <input name="nombre" type="text" class="form-control w-25" id="nombre">
                 <!-- input name es lo importante para poder coger las variables con java -->
             </div>
             <div class="mb-3">
-                <label for="precio" class="form-label">Precio</label>
-                <input name="precio" type="text" class="form-control w-25" id="precio">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input name="apellidos" type="text" class="form-control w-25" id="apellidos">
             </div>
             <div class="mb-2">
-                <label for="stock" class="form-label">Stock</label>
-                <input name="stock" type="text" class="form-control w-25" id="stock">
+                <label for="dni" class="form-label">DNI</label>
+                <input name="dni" type="text" class="form-control w-25" id="dni">
             </div>
             <div class="mb-2">
-                <label for="idproveedor" class="form-label">Id proveedor</label>
-                <input name="idproveedor" type="text" class="form-control w-25" id="idproveedor">
+                <label for="telefono" class="form-label">Telefono</label>
+                <input name="telefono" type="text" class="form-control w-25" id="telefono">
+            </div>
+            <div class="mb-2">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input name="email" type="text" class="form-control w-25" id="email">
             </div>
 
+            <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
         <div id="result"></div>
 
-        <form>
-            <select id="mySelect" onchange="myFunction()" <label for="idproveedor" class="form-label">Id proveedor</label>
-            <option>id="result"</option>
-            </select>
-        </form>
-        <optionid
-        ="result"> </option>
-        <div id="result"></div>
-        <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
-
-
 </body>
 </html>

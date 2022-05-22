@@ -25,6 +25,7 @@
             Bienvenido <% if (currentUser != null) out.print(currentUser.getName()); %>
         </div>
         <ul>
+        <li><a href="/sanfrei/addclient.jsp">Añadir Cliente</a></li>
         <li><a href="/sanfrei/products">Catálogo de Productos</a></li>
         <li><a href="/sanfrei/searchproducts.jsp">Buscar un Producto</a></li>
         <%
