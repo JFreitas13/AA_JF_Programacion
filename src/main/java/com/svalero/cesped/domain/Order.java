@@ -7,8 +7,8 @@ import java.util.List;
 public class Order {
 
     private int idOrder;
-    //private int idClient;
-   // private int idProduct;
+    private int idClient;
+    private int idProduct;
     private LocalDate date;
     private float cantidad;
 
@@ -35,21 +35,21 @@ public class Order {
         this.idOrder = idOrder;
     }
 
-   /* public int getIdClient() {
+   public int getIdClient() {
         return idClient;
     }
 
     public void setIdClient(int idClient) {
         this.idClient = idClient;
-    }*/
+    }
 
-    /*public int getIdProduct() {
+    public int getIdProduct() {
         return idProduct;
     }
 
     public void setIdProduct(int idProduct) {
         this.idProduct = idProduct;
-    }*/
+    }
 
     public LocalDate getDate() {
         return date;

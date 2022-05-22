@@ -18,13 +18,12 @@ public class ProductDao {
     }
 
     public void add(Product product) throws SQLException {
-        String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK, ID_PROVEEDOR) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK) VALUES (?, ?, ?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
             statement.setFloat(2, product.getPrice());
             statement.setInt(3, product.getStock());
-            statement.setString(4, String.valueOf(product.getSupplier()));
             statement.executeUpdate();
     }
 
@@ -54,7 +53,7 @@ public class ProductDao {
 
     //listar todos los productos
     public ArrayList<Product> findAll() throws SQLException {
-        String sql = "SELECT * FROM PRODUCTOS;";
+        String sql = "SELECT * FROM PRODUCTOS";
         ArrayList<Product> products = new ArrayList<>();
 
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -72,7 +71,7 @@ public class ProductDao {
     }
 
     public Optional<Product> findByName(String name) throws SQLException {
-        String sql = "SLECT * FROM PRODUCTOS WHERE NOMBRE = ?;";
+        String sql = "SLECT * FROM PRODUCTOS WHERE NOMBRE = ?";
         Product product = null;
 
         PreparedStatement statement = connection.prepareStatement(sql);

@@ -1,5 +1,8 @@
 package com.svalero.cesped.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Supplier {
 
     private int id;
@@ -8,6 +11,7 @@ public class Supplier {
     private String phone;
     private String email;
 
+    private List<Product> products;
 
     public Supplier() {
 
