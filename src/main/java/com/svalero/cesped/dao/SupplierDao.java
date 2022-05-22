@@ -34,6 +34,23 @@ public class SupplierDao {
             statement.executeUpdate();
         }
 
+    public ArrayList<Supplier> findAllSupplier(String searchText) throws SQLException {
+        String sql = "SELECT * FROM PROVEEDORES WHERE INSTR(NOMBRE, ?) != 0 OR INSTR(CIF, ?) != 0 OR INSTR(TELEFONO, ?) != 0 OR INSTR(EMAIL, ?) != 0 ORDER BY nombre";
+        ArrayList<Supplier> suppliers = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, searchText);
+        statement.setString(2, searchText);
+        statement.setString(3, searchText);
+        statement.setString(4, searchText);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            Supplier supplier = fromResultSet(resultSet);
+            suppliers.add(supplier);
+        }
+        return suppliers;
+    }
+
     //lista de todos los proveerdores
     public ArrayList<Supplier> findAllSupplier() throws SQLException{
         String sql = "SELECT * FROM PROVEEDORES";
@@ -119,6 +136,16 @@ public class SupplierDao {
     private boolean existSupplier(String cif) throws SQLException { //private porque es para uso interno
         Optional<Supplier> supplier = findByCif(cif);
         return supplier.isPresent();
+    }
+
+    private Supplier fromResultSet(ResultSet resultSet) throws SQLException {
+        Supplier supplier = new Supplier();
+        supplier.setId(resultSet.getInt("id_proveedor"));
+        supplier.setName(resultSet.getString("nombre"));
+        supplier.setCif(resultSet.getString("cif"));
+        supplier.setPhone(resultSet.getString("telefono"));
+        supplier.setEmail(resultSet.getString("email"));
+        return supplier;
     }
 
 }
