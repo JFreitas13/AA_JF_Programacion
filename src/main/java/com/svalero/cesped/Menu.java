@@ -304,7 +304,7 @@ public class Menu {
         ClientDao clientDao = new ClientDao(connection);
 
         System.out.println("Lista de clientes");
-        try {
+       /* try {
             ArrayList<Client> clients = clientDao.findAllClient();
             for (Client client : clients) {
                 System.out.println(client.getIdClient() + " | " + client.getName() + " | " + client.getSurname() + " | " + client.getDni() + " | " + client.getPhone() + " | " + client.getEmail());
@@ -312,7 +312,7 @@ public class Menu {
         } catch (SQLException sqlException) {
             System.out.println("Error de conexión. Verifica que los datos son correctos.");
             sqlException.printStackTrace(); //quitar de la version final
-        }
+        }*/
     }
 
     //rehacer con id

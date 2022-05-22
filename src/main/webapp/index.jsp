@@ -25,9 +25,11 @@
             Bienvenido <% if (currentUser != null) out.print(currentUser.getName()); %>
         </div>
         <ul>
-
+        <li><a href="/sanfrei/showclients.jsp">Listado de Clientes</a></li>
+        <li><a href="/sanfrei/searchclient.jsp">Buscar un Cliente</a></li>
         <li><a href="/sanfrei/products">Catálogo de Productos</a></li>
         <li><a href="/sanfrei/searchproducts.jsp">Buscar un Producto</a></li>
+
         <%
             if ((currentUser != null) && Objects.equals(currentUser.getRole(), "admin")) {
         %>

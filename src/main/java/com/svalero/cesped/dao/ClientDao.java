@@ -56,7 +56,6 @@ public class ClientDao {
         int rows = statement.executeUpdate();
         return rows == 1;
     }
-
     public ArrayList<Client> findAllClient() throws SQLException {
         String sql = "SELECT * FROM CLIENTES";
         ArrayList<Client> clients = new ArrayList<>();
@@ -64,13 +63,24 @@ public class ClientDao {
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            Client client = new Client();
-            client.setIdClient(Integer.parseInt(resultSet.getString("ID_CLIENTE")));
-            client.setName(resultSet.getString("NOMBRE"));
-            client.setSurname(resultSet.getString("APELLIDOS"));
-            client.setDni(resultSet.getString("DNI"));
-            client.setPhone(resultSet.getString("TELEFONO"));
-            client.setEmail(resultSet.getString("EMAIL"));
+            Client client = fromResultSet(resultSet);
+            clients.add(client);
+        }
+        return clients;
+    }
+    public ArrayList<Client> findAllClient(String searchText) throws SQLException {
+        String sql = "SELECT * FROM CLIENTES WHERE INSTR(NOMBRE, ?) != 0 OR INSTR(APELLIDOS, ?) != 0 OR INSTR(DNI, ?) != 0 OR INSTR(TELEFONO, ?) != 0 OR INSTR(EMAIL, ?) != 0 ORDER BY APELLIDOS";
+        ArrayList<Client> clients = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, searchText);
+        statement.setString(2, searchText);
+        statement.setString(3, searchText);
+        statement.setString(4, searchText);
+        statement.setString(5, searchText);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            Client client = fromResultSet(resultSet);
             clients.add(client);
         }
         return clients;
@@ -120,5 +130,16 @@ public class ClientDao {
         }
 
         return Optional.ofNullable(client);
+    }
+
+    private Client fromResultSet(ResultSet resultSet) throws SQLException {
+        Client client = new Client();
+        client.setIdClient(resultSet.getInt("id_cliente"));
+        client.setName(resultSet.getString("nombre"));
+        client.setSurname(resultSet.getString("apellidos"));
+        client.setDni(resultSet.getString("dni"));
+        client.setPhone(resultSet.getString("telefono"));
+        client.setEmail(resultSet.getString("email"));
+        return client;
     }
 }
