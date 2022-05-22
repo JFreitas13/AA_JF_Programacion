@@ -25,13 +25,15 @@
             Bienvenido <% if (currentUser != null) out.print(currentUser.getName()); %>
         </div>
         <ul>
-        <li><a href="/sanfrei/addclient.jsp">Añadir Cliente</a></li>
+
         <li><a href="/sanfrei/products">Catálogo de Productos</a></li>
         <li><a href="/sanfrei/searchproducts.jsp">Buscar un Producto</a></li>
         <%
             if ((currentUser != null) && Objects.equals(currentUser.getRole(), "admin")) {
         %>
                 <li><a href="/sanfrei/addproduct.jsp">Registrar un Producto</a></li>
+                <li><a href="/sanfrei/addclient.jsp">Añadir Cliente</a></li>
+                <li><a href="/sanfrei/addsupplier.jsp">Añadir Proveedor</a></li>
         <%
              }
              if (currentUser != null) {
