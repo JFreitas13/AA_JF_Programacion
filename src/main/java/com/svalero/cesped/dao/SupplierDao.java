@@ -72,12 +72,12 @@ public class SupplierDao {
         return suppliers;
     }
 
-    public Supplier findByCif(int id) throws SQLException {
+    /*public Supplier findByCif(String cif) throws SQLException {
         String sql = "SELECT * FROM PROVEEDORES WHERE ID_PROVEEDOR = ?";
         Supplier supplier = null;
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, String.valueOf(id));
+        statement.setString(1, String.valueOf(cif));
         ResultSet resultSet = statement.executeQuery();
 
         if(resultSet.next()) {
@@ -89,7 +89,7 @@ public class SupplierDao {
         }
 
         return supplier;
-    }
+    }*/
 
     //modificar proveedor (que cif quiero modificar y que nuevos datos quiero)
     public  boolean modifySupplier(String cif, Supplier supplier) throws SQLException {
