@@ -4,6 +4,11 @@
 
          import="com.svalero.cesped.domain.User"
 %>
+<%@ page import="com.svalero.cesped.dao.SupplierDao" %>
+<%@ page import="com.svalero.cesped.dao.Database" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="com.svalero.cesped.domain.Supplier" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%
     User currentUser = (User) session.getAttribute("currentUser");
@@ -49,25 +54,32 @@
                 <label for="stock" class="form-label">Stock</label>
                 <input name="stock" type="text" class="form-control w-25" id="stock">
             </div>
-            <div class="mb-2">
+            <!--<div class="mb-2">
                 <label for="idproveedor" class="form-label">Id proveedor</label>
                 <input name="idproveedor" type="text" class="form-control w-25" id="idproveedor">
+            </div>-->
+            <%
+                Database database = new Database();
+                Connection connection = database.getConnection();
+            %>
+            <div class="form-label">
+                <label for="proveedor">Proveedor:</label>
+                <select class="form-control w-25" id="proveedor" name="proveedor">
+                    <option>Selecciona un Proveedor</option>
+                    <%
+                        SupplierDao supplierDao = new SupplierDao(connection);
+                        ArrayList<Supplier> suppliers = supplierDao.findAllSupplier();
+                        for (Supplier supplier : suppliers) {
+                            out.println("<option value=\"" + supplier.getId() + "\">" + supplier.getName() + " " + supplier.getPhone() + "</option>");
+                        }
+                    %>
+                </select>
             </div>
-
         </form>
         <div id="result"></div>
 
-        <form>
-            <select id="mySelect" onchange="myFunction()" <label for="idproveedor" class="form-label">Id proveedor</label>
-            <option>id="result"</option>
-            </select>
-        </form>
-        <optionid
-        ="result"> </option>
-        <div id="result"></div>
         <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
-
 
 </body>
 </html>

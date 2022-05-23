@@ -39,7 +39,9 @@
             <div class="card-body">
                 <h5 class="card-title"><%= client.getName() + " " + client.getSurname() %></h5>
                 <h5 class="card-title"><%= client.getPhone() %></h5>
-                <a href="client.jsp?dni=<%= client.getDni() %>" class="btn btn-primary">Llamar</a>
+                <h5 class="card-title"><%= client.getDni() %></h5>
+                <a href="client.jsp?phone=<%= client.getPhone() %>" class="btn btn-primary">Llamar</a>
+                <a href="deleteclient.jsp?dni=<%= client.getDni() %>" class="btn btn-outline-danger">Eliminar</a>
             </div>
         </div>
     </div>

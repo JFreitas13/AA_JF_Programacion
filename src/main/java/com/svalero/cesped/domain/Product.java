@@ -19,11 +19,11 @@ public class Product {
         orders = new ArrayList<>(); //si creo un producto nuevo debo inicializar el array
     }
 
-    public Product(String name, float price, int stock, Supplier supplier) {
+    public Product(String name, float price, int stock, int idSupplier) {
         this.name = name;
         this.price = price;
         this.stock = stock;
-        this.supplier = supplier;
+        this.idSupplier = idSupplier;
         orders = new ArrayList<>();
     }
 

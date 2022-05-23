@@ -18,12 +18,13 @@ public class ProductDao {
     }
 
     public void add(Product product) throws SQLException {
-        String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK, ID_PROVEEDOR) VALUES (?, ?, ?, ?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
             statement.setFloat(2, product.getPrice());
             statement.setInt(3, product.getStock());
+            statement.setString(4, String.valueOf(product.getIdSupplier()));
             statement.executeUpdate();
     }
 
