@@ -13,10 +13,10 @@ public class Product {
 
     private Supplier supplier; //para relacionar con Supplier
 
-    private List<Order> orders; //relacionar productos con pedidos
+    //private List<Order> orders; //relacionar productos con pedidos
 
     public Product() {
-        orders = new ArrayList<>(); //si creo un producto nuevo debo inicializar el array
+        //orders = new ArrayList<>(); //si creo un producto nuevo debo inicializar el array
     }
 
     public Product(String name, float price, int stock, String idSupplier) {
@@ -24,7 +24,7 @@ public class Product {
         this.price = price;
         this.stock = stock;
         this.idSupplier = idSupplier;
-        orders = new ArrayList<>();
+        //orders = new ArrayList<>();
     }
 
     public int getIdProduct() {

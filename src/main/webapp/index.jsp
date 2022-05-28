@@ -30,7 +30,7 @@
         <li><a href="/sanfrei/searchclient.jsp">Buscar Clientes</a></li>
         <li><a href="/sanfrei/showsuppliers.jsp">Listado de Proveedores</a></li>
         <li><a href="/sanfrei/searchsupplier.jsp">Buscar Proveedores</a></li>
-        <li><a href="/sanfrei/products">Catálogo de Productos</a></li>
+        <li><a href="/sanfrei/showproducts.jsp">Listado de Productos</a></li>
         <li><a href="/sanfrei/searchproduct.jsp">Buscar un Producto</a></li>
 
         <%

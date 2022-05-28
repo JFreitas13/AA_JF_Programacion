@@ -29,7 +29,7 @@ public class SearchProductsServlet extends HttpServlet {
         Database database = new Database();
         ProductDao productDao = new ProductDao(database.getConnection());
         try {
-            ArrayList<Product> products = productDao.findAll(searchText);
+            ArrayList<Product> products = productDao.findAllProduct(searchText);
             StringBuilder result = new StringBuilder("<ul class='list-group");
             for (Product product : products) {
                 result.append("<li class='list-group-item'>").append((product.getName())).append("</li>");
