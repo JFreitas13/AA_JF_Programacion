@@ -41,7 +41,7 @@
                 <h5 class="card-title"><%= client.getDni() %></h5>
                 <a href="client.jsp?phone=<%= client.getPhone() %>" class="btn btn-outline-primary">Llamar</a>
                 <a href="addclient.jsp?idClient=<%= client.getIdClient() %>" class="btn btn-outline-warning">Modificar</a>
-                <a href="deleteclient.jsp?dni=<%= client.getDni() %>" class="btn btn-outline-danger">Eliminar</a>
+                <a href="deleteclient.jsp?idClient=<%= client.getIdClient() %>" class="btn btn-outline-danger">Eliminar</a>
             </div>
         </div>
     </div>

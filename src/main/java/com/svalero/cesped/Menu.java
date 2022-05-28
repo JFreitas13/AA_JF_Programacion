@@ -94,9 +94,9 @@ public class Menu {
                 case "13":
                     showClient();
                     break;
-                case "14":
+                /*case "14":
                     deleteClient();
-                    break;
+                    break;*/
             }
         } while (!choice.equals("15"));
 
@@ -316,12 +316,12 @@ public class Menu {
     }
 
     //rehacer con id
-    private void deleteClient() {
+    /*private void deleteClient() {
         System.out.println("Indicar DNI del cliente a eliminar: ");
         String dni = keyboard.nextLine();
         ClientDao clientDao = new ClientDao(connection);
         try {
-            boolean deleted = clientDao.deleteClient(dni);
+            boolean deleted = clientDao.deleteClient();
             if (deleted)
                 System.out.println("El cliente se ha eliminado correctamente");
             else
@@ -329,5 +329,5 @@ public class Menu {
         } catch (SQLException sqle) {
             System.out.println("Error de conexión. Verifica que los datos son correctos.");
         }
-    }
+    }*/
 }

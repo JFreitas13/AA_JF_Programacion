@@ -37,12 +37,12 @@
         });
     </script>
     <%
-        String dni = request.getParameter("dni");
+        String clientId = request.getParameter("idClient");
         Database database = new Database();
         ClientDao clientDao = new ClientDao((database.getConnection()));
         Client client = null;
         try {
-            Optional<Client> optionalClient = clientDao.findByDni(dni);
+            Optional<Client> optionalClient = clientDao.findById(Integer.parseInt(clientId));
             client = optionalClient.get();
     %>
     <div class="container">
@@ -50,8 +50,8 @@
         <div class="card text-center">
             <div class="card-header">¿Estás seguro que quieres eliminar el cliente?</div>
             <div class="card-body">
-                <a href="delete-client?dni=<%= client.getDni() %>" class="btn btn-danger">Si</a>
-                <a href="showclients.jsp?dni<%= client.getDni() %>" class="btn btn-outline-danger">No</a>
+                <a href="delete-client?idClient=<%= client.getIdClient() %>" class="btn btn-danger">Si</a>
+                <a href="showclients.jsp?idClient<%= client.getIdClient() %>" class="btn btn-outline-danger">No</a>
             </div>
         </div>
     </div>

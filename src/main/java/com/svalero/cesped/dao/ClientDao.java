@@ -33,11 +33,11 @@ public class ClientDao {
         statement.executeUpdate();
     }
 
-    public boolean deleteClient(String dni) throws SQLException {
-        String sql = "DELETE FROM CLIENTES WHERE DNI = ?";
+    public boolean deleteClient(int idClient) throws SQLException {
+        String sql = "DELETE FROM CLIENTES WHERE ID_CLIENTE = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, dni);
+        statement.setInt(1, idClient);
         int rows = statement.executeUpdate();
 
         return rows == 1;

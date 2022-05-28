@@ -25,12 +25,12 @@ public class DeleteClientServlet extends HttpServlet {
             response.sendRedirect("AccesoDenegado.jsp");
         }
 
-        String dni = request.getParameter("dni");
+        String clientId = request.getParameter("idClient");
 
         Database database = new Database();
         ClientDao clientDao = new ClientDao(database.getConnection());
         try {
-            clientDao.deleteClient(dni);
+            clientDao.deleteClient(Integer.parseInt(clientId));
             out.println("<div class='alert alert-success role='alert'>El cliente se ha borrado correctamente</div>");
         } catch (SQLException sqle) {
             out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error al borrar el cliente. Intentalo más tarde</div>");
