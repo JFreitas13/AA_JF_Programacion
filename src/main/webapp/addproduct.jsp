@@ -18,7 +18,7 @@
         response.sendRedirect("AccesoDenegado.jsp");
     }
 
-    String supplierId = request.getParameter("idProveedor");
+    String supplierId = request.getParameter("id");
     Database database = new Database();
     SupplierDao supplierDao = new SupplierDao((database.getConnection()));
     Supplier supplier = null;

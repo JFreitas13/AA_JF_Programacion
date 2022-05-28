@@ -57,32 +57,35 @@
 
     <div class="container">
         <h2>Añadir cliente</h2>
+        <div class="alert alert-secondary" role="alert">
+            Todos los campos son obligatórios. Si el cliente ya existe lo puedes modificar.
+        </div>
 
         <form>
             <div class="mb-2">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input name="nombre" type="text" class="form-control w-25" id="nombre" value="<% if (client != null) out.print(client.getName()); %>">
+                <input name="nombre" type="text" class="form-control w-25" id="nombre" value="<% if (client != null) out.print(client.getName()); %>" required>
                 <!-- input name es lo importante para poder coger las variables con java -->
             </div>
             <div class="mb-3">
                 <label for="apellidos" class="form-label">Apellidos</label>
-                <input name="apellidos" type="text" class="form-control w-25" id="apellidos" value="<% if (client != null) out.print(client.getSurname()); %>">
+                <input name="apellidos" type="text" class="form-control w-25" id="apellidos" value="<% if (client != null) out.print(client.getSurname()); %>" required>
             </div>
             <div class="mb-2">
                 <label for="dni" class="form-label">DNI</label>
-                <input name="dni" type="text" class="form-control w-25" id="dni" value="<% if (client != null) out.print(client.getDni()); %>">
+                <input name="dni" type="text" class="form-control w-25" id="dni" value="<% if (client != null) out.print(client.getDni()); %>" required>
             </div>
             <div class="mb-2">
                 <label for="telefono" class="form-label">Telefono</label>
-                <input name="telefono" type="text" class="form-control w-25" id="telefono" value="<% if (client != null) out.print(client.getPhone()); %>">
+                <input name="telefono" type="text" class="form-control w-25" id="telefono" value="<% if (client != null) out.print(client.getPhone()); %>" required>
             </div>
             <div class="mb-2">
                 <label for="email" class="form-label">Correo Electrónico</label>
-                <input name="email" type="text" class="form-control w-25" id="email" value="<% if (client != null) out.print(client.getEmail()); %>">
+                <input type="email" name="email" type="text" class="form-control is-invalid w-25" id="email" placeholder="name@example.com" value="<% if (client != null) out.print(client.getEmail()); %>" required>
             </div>
             <input type="hidden" name="action" value="<% if (client != null) out.print("modify"); else out.print("register"); %>">
             <input type="hidden" name="clientId" value="<% if (client != null) out.print(client.getIdClient()); %>"> <!--campo oculto. Enviar valor definido internamente-->
-            <button type="submit" class="btn btn-primary"><%= textBouton %></button>
+            <button type="submit" class="btn btn-success"><%= textBouton %></button>
         </form>
         <div id="result"></div>
         <a href="index.jsp" class="btn btn-primary">Volver</a>

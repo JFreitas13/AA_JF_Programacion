@@ -17,7 +17,7 @@ public class ProductDao {
         this.connection = connection;
     }
 
-    public void add(Product product) throws SQLException {
+    public void add(String supplierId, Product product) throws SQLException {
         String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK, ID_PROVEEDOR) VALUES (?, ?, ?, ?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);

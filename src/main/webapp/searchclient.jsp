@@ -30,6 +30,9 @@
 </script>
 <div class="container">
     <h2>Buscar un cliente</h2>
+    <div class="alert alert-secondary" role="alert">
+        Puedes buscar um cliente por nombre, apellidos, DNI, telefono o e-mail.
+    </div>
     <form>
         <div class="mb-2">
             <label for="searchtext" class="form-label">Texto</label>

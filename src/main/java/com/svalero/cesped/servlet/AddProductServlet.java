@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Optional;
 
 @WebServlet("/add-product")
 public class AddProductServlet extends HttpServlet {
@@ -30,22 +31,29 @@ public class AddProductServlet extends HttpServlet {
         }
 
         //Product product = new Product();
-
-        String nombre = request.getParameter("nombre");
-        float precio = Float.parseFloat(request.getParameter("precio"));
-        int stock = Integer.parseInt(request.getParameter("stock"));
-        int idProveedor = Integer.parseInt(request.getParameter("id_proveedor"));
-
-        Product product = new Product(nombre, precio, stock, idProveedor);
+        //String nombre = request.getParameter("nombre");
+        //float precio = Float.parseFloat(request.getParameter("precio"));
+        //int stock = Integer.parseInt(request.getParameter("stock"));
+        String supplierId = request.getParameter("id");
 
         Database database = new Database();
-        ProductDao productDao = new ProductDao(database.getConnection());
+        SupplierDao supplierDao = new SupplierDao(database.getConnection());
         try {
-            productDao.add(product);
-            out.println("<div class='alert alert-success' role='alert'>El producto se ha añadido correctamente</div>");
+            Optional<Supplier> supplier = supplierDao.findById(Integer.parseInt(supplierId));
+
+            Product product = new Product();
+            product.setName(request.getParameter("name"));
+            product.setPrice(Float.parseFloat(request.getParameter("price")));
+            product.setStock(Integer.parseInt(request.getParameter("stock")));
+
+            ProductDao productDao = new ProductDao(database.getConnection());
+            productDao.add(supplierId, product);
+            out.println("<div class='alert alert-success' role='alert'>producto añadido correctamente</div>");
         } catch (SQLException sqle) {
-            out.println("<div class='alert alert-success' role='alert'>proveedor no encontrado</div>");
+            out.println("<div class='alert alert-success' role='alert'>Error de conexión.</div>");
             sqle.printStackTrace();
+
+
 
         }
     }

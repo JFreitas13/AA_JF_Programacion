@@ -155,15 +155,10 @@ public class SupplierDao {
         Supplier supplier = null;
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, String.valueOf(id));
+        statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            supplier = new Supplier();
-            supplier.setId(Integer.parseInt(resultSet.getString("ID_PROVEEDOR")));
-            supplier.setName(resultSet.getString("NOMBRE"));
-            supplier.setCif(resultSet.getString("CIF"));
-            supplier.setPhone(resultSet.getString("TELEFONO"));
-            supplier.setEmail(resultSet.getString("EMAIL"));
+            supplier = fromResultSet(resultSet);
         }
         return  Optional.ofNullable(supplier);
     }

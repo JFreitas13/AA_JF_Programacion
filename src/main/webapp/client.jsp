@@ -37,8 +37,8 @@
             <div class="card-header">Información cliente</div>
             <div class="card-body">
                 <h5 class="card-title"><%= client.getName() + " " + client.getSurname() %></h5>
-                <h5 class="card-title"><%= client.getPhone() %></h5>
-                <h5 class="card-title"><%= client.getDni() %></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Telefono: <%= client.getPhone() %></h6>
+                <h6 class="card-subtitle mb-2 text-muted">DNI: <%= client.getDni() %></h6>
                 <a href="client.jsp?phone=<%= client.getPhone() %>" class="btn btn-outline-primary">Llamar</a>
                 <a href="addclient.jsp?idClient=<%= client.getIdClient() %>" class="btn btn-outline-warning">Modificar</a>
                 <a href="deleteclient.jsp?idClient=<%= client.getIdClient() %>" class="btn btn-outline-danger">Eliminar</a>

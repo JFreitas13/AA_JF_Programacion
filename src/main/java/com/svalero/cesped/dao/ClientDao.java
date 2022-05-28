@@ -82,7 +82,7 @@ public class ClientDao {
         return rows == 1;
     }
     public ArrayList<Client> findAllClient() throws SQLException {
-        String sql = "SELECT * FROM CLIENTES";
+        String sql = "SELECT * FROM CLIENTES ORDER BY NOMBRE";
         ArrayList<Client> clients = new ArrayList<>();
 
         PreparedStatement statement = connection.prepareStatement(sql);

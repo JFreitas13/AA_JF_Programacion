@@ -27,6 +27,9 @@
 <body>
 <div class="container">
     <h2>Listado de proveedores</h2>
+    <div class="alert alert-secondary" role="alert">
+        Selecciona el proveedor que quieres consultar.
+    </div>
     <ul class="list-group">
         <%
             // Acceder a la base de datos y recuperar la información de los clientes

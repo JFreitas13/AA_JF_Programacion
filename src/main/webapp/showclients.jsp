@@ -26,7 +26,7 @@
 <div class="container">
     <h2>Listado de clientes</h2>
     <div class="alert alert-secondary" role="alert">
-        Para ver información más detallada del cliente pincha en él.
+        Selecciona el cliente que quieres consultar.
     </div>
     <ul class="list-group">
         <%
