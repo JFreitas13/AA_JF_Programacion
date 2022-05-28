@@ -37,7 +37,7 @@
                 for (Supplier supplier : suppliers) {
         %>
                     <li class="list-group-item">
-                        <a target="_blank" href="supplier.jsp?cif=<%= supplier.getCif() %>"><%= supplier.getName() %></a>
+                        <a target="_blank" href="supplier.jsp?id=<%= supplier.getId() %>"><%= supplier.getName() %></a>
                     </li>
         <%
             }

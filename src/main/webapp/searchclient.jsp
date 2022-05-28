@@ -35,9 +35,10 @@
             <label for="searchtext" class="form-label">Texto</label>
             <input name="searchtext" type="text" class="form-control w-25" id="searchtext">
         </div>
-        <button type="submit" class="btn btn-primary">Buscar</button>
+        <button type="submit" class="btn btn-success">Buscar</button>
     </form>
     <div id="result"></div>
+    <a href="index.jsp" class="btn btn-primary">Menú Principal</a>
 </div>
 </body>
 </html>

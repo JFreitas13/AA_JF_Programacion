@@ -4,12 +4,35 @@
 
          import="com.svalero.cesped.domain.User"
 %>
+<%@ page import="com.svalero.cesped.domain.Supplier" %>
+<%@ page import="com.svalero.cesped.dao.Database" %>
+<%@ page import="com.svalero.cesped.dao.SupplierDao" %>
+<%@ page import="java.util.Optional" %>
+<%@ page import="java.sql.SQLException" %>
 
 <%
     User currentUser = (User) session.getAttribute("currentUser");
     if (currentUser == null) {
         response.sendRedirect("AccesoDenegado.jsp");
     }
+
+    String textBouton = "";
+    String supplierId = request.getParameter("id");
+    Supplier supplier = null;
+    if (supplierId != null) {
+        textBouton = "Modificar";
+        Database database = new Database();
+        SupplierDao supplierDao = new SupplierDao(database.getConnection());
+        try {
+            Optional<Supplier> optionalSupllier = supplierDao.findById(Integer.parseInt(supplierId)); //recuperar un cliente con determinado DNI
+            supplier = optionalSupllier.get();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    } else {
+        textBouton = "Registrar";
+    }
+    
 %>
 
 <html>
@@ -25,7 +48,7 @@
             $("form").on("submit", function (event) {
                 event.preventDefault();
                 var formValue = $(this).serialize();
-                $.post("add-supplier", formValue, function (data) { <!-- servlet que recibe todos los datos del formulario -->
+                $.post("add-modify-supplier", formValue, function (data) { <!-- servlet que recibe todos los datos del formulario -->
                     $("#result").html(data); <!-- Lo usamos para enviar la respuesta al div en la misma página -->
                 });
             });
@@ -38,25 +61,28 @@
         <form>
             <div class="mb-2">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input name="nombre" type="text" class="form-control w-25" id="nombre">
+                <input name="nombre" type="text" class="form-control w-25" id="nombre" value="<% if (supplier != null) out.print(supplier.getName()); %>">
                 <!-- input name es lo importante para poder coger las variables con java -->
             </div>
             <div class="mb-2">
                 <label for="cif" class="form-label">CIF</label>
-                <input name="cif" type="text" class="form-control w-25" id="cif">
+                <input name="cif" type="text" class="form-control w-25" id="cif" value="<% if (supplier != null) out.print(supplier.getCif()); %>">
             </div>
             <div class="mb-2">
                 <label for="telefono" class="form-label">Telefono</label>
-                <input name="telefono" type="text" class="form-control w-25" id="telefono">
+                <input name="telefono" type="text" class="form-control w-25" id="telefono" value="<% if (supplier != null) out.print(supplier.getPhone()); %>">
             </div>
             <div class="mb-2">
                 <label for="email" class="form-label">Correo Electrónico</label>
-                <input name="email" type="text" class="form-control w-25" id="email">
+                <input name="email" type="text" class="form-control w-25" id="email" value="<% if (supplier != null) out.print(supplier.getEmail()); %>">
             </div>
 
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <input type="hidden" name="action" value="<% if (supplier != null) out.print("modify"); else out.print("register"); %>">
+            <input type="hidden" name="supplierId" value="<% if (supplier != null) out.print(supplier.getId()); %>"> <!--campo oculto. Enviar valor definido internamente-->
+            <button type="submit" class="btn btn-primary"><%= textBouton %></button>
         </form>
         <div id="result"></div>
+        <a href="index.jsp" class="btn btn-primary">Menú Principal</a>
 
     </div>
 </body>

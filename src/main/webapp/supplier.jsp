@@ -23,14 +23,13 @@
 </head>
 <body>
     <%
-        String supplierCif = request.getParameter("cif");
+        String supplierId = request.getParameter("id");
         Database database = new Database();
         SupplierDao supplierDao = new SupplierDao((database.getConnection()));
         Supplier supplier = null;
         try {
-            Optional<Supplier> optionalSupplier = supplierDao.findByCif(supplierCif);
+            Optional<Supplier> optionalSupplier = supplierDao.findById(Integer.parseInt(supplierId));
             supplier = optionalSupplier.get();
-
     %>
     <div class="container">
         <div class="card text-center">
@@ -38,7 +37,8 @@
             <div class="card-body">
                 <h5 class="card-title"><%= supplier.getName()%></h5>
                 <h5 class="card-title"><%= supplier.getPhone() %></h5>
-                <a href="client.jsp?dni=<%= supplier.getCif() %>" class="btn btn-primary">Llamar</a>
+                <a href="supplier.jsp?phone=<%= supplier.getPhone() %>" class="btn btn-primary">Llamar</a>
+                <a href="addsupplier.jsp?id=<%= supplier.getId() %>" class="btn btn-outline-warning">Modificar</a>
                 <a href="delete-supplier?cif=<%= supplier.getCif() %>" class="btn btn-outline-danger">Eliminar</a>
             </div>
         </div>

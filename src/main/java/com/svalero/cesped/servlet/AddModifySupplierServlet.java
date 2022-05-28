@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet("/add-supplier")
-public class AddSupplierServlet extends HttpServlet {
+@WebServlet("/add-modify-supplier")
+public class AddModifySupplierServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,13 +32,20 @@ public class AddSupplierServlet extends HttpServlet {
         String cif = request.getParameter("cif");
         String phone = request.getParameter("telefono");
         String email = request.getParameter("email");
+        String action = request.getParameter("action");
+        String supplierId = request.getParameter("supplierId");
         Supplier supplier = new Supplier(nombre, cif, phone, email); //creo el proveedor
 
         Database database = new Database();
         SupplierDao supplierDao = new SupplierDao(database.getConnection());
         try {
-            supplierDao.addSupplier(supplier);
-            out.println("<div class='alert alert-success' role='alert'>El proveedor se ha añadido correctamente</div>");
+            if (action.equals("register")) {
+                supplierDao.addSupplier(supplier);
+                out.println("<div class='alert alert-success' role='alert'>El proveedor se ha añadido correctamente</div>");
+            } else {
+                supplierDao.modifyById(Integer.parseInt(supplierId), supplier);
+                out.println("<div class='alert alert-success' role='alert'>El proveedor se ha modificado correctamente</div>");
+            }
         } catch (SupplierAlreadyExistException saee) {
             out.println("<div class='alert alert-warning' role='alert'>El proveedor ya está registrado en el sistema.</div>");
         } catch (SQLException sqle) {

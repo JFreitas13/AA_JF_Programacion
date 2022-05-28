@@ -56,14 +56,9 @@ public class SupplierDao {
         ArrayList<Supplier> suppliers = new ArrayList<>();
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        ResultSet result = statement.executeQuery();
-
-        while (result.next()) {
-            Supplier supplier = new Supplier( "a", "12345678Y", "61541408", "j@jk.com");
-            supplier.setName(result.getString("NOMBRE"));
-            supplier.setCif(result.getString("CIF"));
-            supplier.setPhone(result.getString("TELEFONO"));
-            supplier.setEmail(result.getString("EMAIL"));
+        ResultSet resultset = statement.executeQuery();
+        while (resultset.next()) {
+            Supplier supplier = fromResultSet(resultset);
             suppliers.add(supplier);
         }
         statement.close();
@@ -100,6 +95,20 @@ public class SupplierDao {
         statement.setString(3, supplier.getPhone());
         statement.setString(4, supplier.getEmail());
         statement.setString(5, cif);
+        //nº filas modificadas
+        int rows = statement.executeUpdate();
+        return rows == 1;
+    }
+
+    public  boolean modifyById(int id, Supplier supplier) throws SQLException {
+        String sql = "UPDATE PROVEEDORES SET NOMBRE = ?, CIF = ?, TELEFONO = ?, EMAIL = ? WHERE ID_PROVEEDOR = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, supplier.getName());
+        statement.setString(2, supplier.getCif());
+        statement.setString(3, supplier.getPhone());
+        statement.setString(4, supplier.getEmail());
+        statement.setInt(5, id);
         //nº filas modificadas
         int rows = statement.executeUpdate();
         return rows == 1;

@@ -31,7 +31,6 @@
         try {
             Optional<Client> optionalClient = clientDao.findById(Integer.parseInt(clientId));
             client = optionalClient.get();
-
     %>
     <div class="container">
         <div class="card text-center">

@@ -35,10 +35,9 @@ public class SearchClientServlet extends HttpServlet {
             result.append("</ul>");
             out.println(result);
         } catch (SQLException sqle) {
-            out.println("<div class='alert alert-danger' role='alert'>Cliente no encontrado. Verifica que los datos son correctos</div>");
+            out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error. Intentalo más tarde</div>");
             sqle.printStackTrace(); //TODO QUITAR ESTO DE LA VERSION FINAL
         }
     }
 }
-
 //TODO MEJORAR BUSCADOR

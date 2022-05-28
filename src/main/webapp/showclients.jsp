@@ -53,7 +53,7 @@
             }
         %>
     </ul>
-    <a href="index.jsp" class="btn btn-primary">Volver</a>
+    <a href="index.jsp" class="btn btn-primary">Menú Principal</a>
 </div>
 </body>
 </html>
