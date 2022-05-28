@@ -25,28 +25,18 @@ public class DeleteSupplierServlet extends HttpServlet {
         if (currentUser == null) {
             response.sendRedirect("AccesoDenegado.jsp");
         }
-        String cif = request.getParameter("cif");
+
+        String supplierId = request.getParameter("id");
 
         Database database = new Database();
         SupplierDao supplierDao = new SupplierDao(database.getConnection());
         try {
-            supplierDao.deleteSupplier(cif);
+            supplierDao.deleteById(Integer.parseInt(supplierId));
             out.println("<div class='alert alert-success' role='alert'>El proveedor se ha borrado correctamente</div>");
         } catch (SQLException sqle) {
             out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error al eliminar el proveedor. Intentalo más tarde</div>");
             sqle.printStackTrace(); //TODO BORRAR DE LA VERSION FINAL
 
-       /* String idSupplier = request.getParameter("id_proveedor");
-
-        Database database = new Database();
-        SupplierDao supplierDao = new SupplierDao(database.getConnection());
-        try {
-            supplierDao.deleteById(Integer.parseInt(idSupplier));
-            out.println("<div class='alert alert-success' role='alert'>El proveedor se ha borrado correctamente</div>");
-        } catch (SQLException sqle) {
-            out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error al registrar el cliente. Intentalo más tarde</div>");
-            sqle.printStackTrace(); //TODO BORRAR DE LA VERSION FINAL
-        }*/
         }
     }
 }

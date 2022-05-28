@@ -39,7 +39,7 @@
                 <h5 class="card-title"><%= supplier.getPhone() %></h5>
                 <a href="supplier.jsp?phone=<%= supplier.getPhone() %>" class="btn btn-primary">Llamar</a>
                 <a href="addsupplier.jsp?id=<%= supplier.getId() %>" class="btn btn-outline-warning">Modificar</a>
-                <a href="delete-supplier?cif=<%= supplier.getCif() %>" class="btn btn-outline-danger">Eliminar</a>
+                <a href="deletesupplier.jsp?id=<%= supplier.getId() %>" class="btn btn-outline-danger">Eliminar</a>
             </div>
         </div>
     </div>
