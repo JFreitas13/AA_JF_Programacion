@@ -9,13 +9,28 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="com.svalero.cesped.domain.Supplier" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Optional" %>
+<%@ page import="java.sql.SQLException" %>
 
 <%
     User currentUser = (User) session.getAttribute("currentUser");
     if (currentUser == null) {
         response.sendRedirect("AccesoDenegado.jsp");
     }
+
+    String supplierId = request.getParameter("idProveedor");
+    Database database = new Database();
+    SupplierDao supplierDao = new SupplierDao((database.getConnection()));
+    Supplier supplier = null;
+    try {
+        Optional<Supplier> optionalSupllier = supplierDao.findById(Integer.parseInt(supplierId));
+        supplier = optionalSupllier.get();
+    } catch (SQLException sqle) {
+        sqle.printStackTrace();
+    }
+
 %>
+
 
 <html>
 <head>
@@ -59,26 +74,25 @@
                 <input name="idproveedor" type="text" class="form-control w-25" id="idproveedor">
             </div>-->
             <%
-                Database database = new Database();
-                Connection connection = database.getConnection();
+                //Database database = new Database();
+                //Connection connection = database.getConnection();
             %>
             <div class="form-label">
-                <label for="proveedor">Proveedor:</label>
-                <select class="form-control w-25" id="proveedor" name="proveedor">
+                <label for="idProveedor">Proveedor</label>
+                <select class="form-control w-25" id="idProveedor" name="idProveedor" value="<% supplier.getId(); %>">
                     <option>Selecciona un Proveedor</option>
                     <%
-                        SupplierDao supplierDao = new SupplierDao(connection);
+                        //SupplierDao supplierDao = new SupplierDao(database.getConnection());
                         ArrayList<Supplier> suppliers = supplierDao.findAllSupplier();
-                        for (Supplier supplier : suppliers) {
-                            out.println("<option value=\"" + supplier.getId() + "\">" + supplier.getName() + " " + supplier.getPhone() + "</option>");
+                        for (Supplier supplier1r : suppliers) {
+                            out.println("<option value=\"" + supplier.getId() + "\">" + supplier.getName() + "</option>");
                         }
                     %>
                 </select>
             </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
         <div id="result"></div>
-
-        <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
 
 </body>

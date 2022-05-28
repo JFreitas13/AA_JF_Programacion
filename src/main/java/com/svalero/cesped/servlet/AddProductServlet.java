@@ -34,9 +34,9 @@ public class AddProductServlet extends HttpServlet {
         String nombre = request.getParameter("nombre");
         float precio = Float.parseFloat(request.getParameter("precio"));
         int stock = Integer.parseInt(request.getParameter("stock"));
-        int proveedor = Integer.parseInt(request.getParameter("proveedr"));
+        int idProveedor = Integer.parseInt(request.getParameter("id_proveedor"));
 
-        Product product = new Product(nombre, precio, stock, proveedor);
+        Product product = new Product(nombre, precio, stock, idProveedor);
 
         Database database = new Database();
         ProductDao productDao = new ProductDao(database.getConnection());

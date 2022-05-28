@@ -4,12 +4,9 @@
 
          import="com.svalero.cesped.domain.User"
          import="com.svalero.cesped.dao.Database"
-         import="com.svalero.cesped.dao.ClientDao"
-         import="com.svalero.cesped.domain.Client"
-         import="java.util.List"
+
 %>
 <%@ page import="java.util.Optional" %>
-<%@ page import="jdk.internal.jimage.ImageReaderFactory" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="com.svalero.cesped.domain.Supplier" %>
 <%@ page import="com.svalero.cesped.dao.SupplierDao" %>
@@ -42,6 +39,7 @@
                 <h5 class="card-title"><%= supplier.getName()%></h5>
                 <h5 class="card-title"><%= supplier.getPhone() %></h5>
                 <a href="client.jsp?dni=<%= supplier.getCif() %>" class="btn btn-primary">Llamar</a>
+                <a href="delete-supplier?cif=<%= supplier.getCif() %>" class="btn btn-outline-danger">Eliminar</a>
             </div>
         </div>
     </div>

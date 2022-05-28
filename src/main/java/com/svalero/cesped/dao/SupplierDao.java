@@ -1,6 +1,5 @@
 package com.svalero.cesped.dao;
 
-import com.svalero.cesped.domain.Client;
 import com.svalero.cesped.domain.Supplier;
 import com.svalero.cesped.exception.SupplierAlreadyExistException;
 
@@ -115,12 +114,39 @@ public class SupplierDao {
         return rows == 1;
     }
 
+    public boolean deleteById(int id) throws SQLException {
+        String sql = "DELETE FROM PROVEEDORES WHERE ID_PROVEEDOR = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        int rows = statement.executeUpdate();
+        return rows == 1;
+    }
+
     public Optional<Supplier> findByCif(String cif) throws SQLException {
         String sql = "SELECT * FROM PROVEEDORES WHERE CIF = ?";
         Supplier supplier = null;
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1,cif);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            supplier = new Supplier();
+            supplier.setId(Integer.parseInt(resultSet.getString("ID_PROVEEDOR")));
+            supplier.setName(resultSet.getString("NOMBRE"));
+            supplier.setCif(resultSet.getString("CIF"));
+            supplier.setPhone(resultSet.getString("TELEFONO"));
+            supplier.setEmail(resultSet.getString("EMAIL"));
+        }
+        return  Optional.ofNullable(supplier);
+    }
+
+    public Optional<Supplier> findById(int id) throws SQLException {
+        String sql = "SELECT * FROM PROVEEDORES WHERE ID_PROVEEDOR = ?";
+        Supplier supplier = null;
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, String.valueOf(id));
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             supplier = new Supplier();

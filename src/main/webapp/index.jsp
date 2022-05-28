@@ -24,6 +24,7 @@
         <div class="alert alert-success" role="alert">
             Bienvenido <% if (currentUser != null) out.print(currentUser.getName()); %>
         </div>
+
         <ul>
         <li><a href="/sanfrei/showclients.jsp">Listado de Clientes</a></li>
         <li><a href="/sanfrei/searchclient.jsp">Buscar Clientes</a></li>

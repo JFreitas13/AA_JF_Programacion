@@ -50,6 +50,7 @@
             }
         %>
     </ul>
+    <a href="index.jsp" class="btn btn-primary">Volver</a>
 </div>
 </body>
 </html>
