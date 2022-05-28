@@ -51,7 +51,7 @@ public class SupplierDao {
     }
 
     //lista de todos los proveerdores
-    public ArrayList<Supplier> findAllSupplier() throws SQLException{
+    public ArrayList<Supplier> findAll() throws SQLException{
         String sql = "SELECT * FROM PROVEEDORES";
         ArrayList<Supplier> suppliers = new ArrayList<>();
 

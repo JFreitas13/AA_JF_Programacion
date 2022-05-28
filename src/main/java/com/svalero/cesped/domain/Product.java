@@ -9,7 +9,7 @@ public class Product {
     private String name;
     private float price;
     private int stock;
-    private int idSupplier;
+    private String idSupplier;
 
     private Supplier supplier; //para relacionar con Supplier
 
@@ -19,7 +19,7 @@ public class Product {
         orders = new ArrayList<>(); //si creo un producto nuevo debo inicializar el array
     }
 
-    public Product(String name, float price, int stock, int idSupplier) {
+    public Product(String name, float price, int stock, String idSupplier) {
         this.name = name;
         this.price = price;
         this.stock = stock;
@@ -59,11 +59,11 @@ public class Product {
         this.stock = stock;
     }
 
-    public int getIdSupplier() {
+    public String getIdSupplier() {
         return idSupplier;
     }
 
-    public void setIdSupplier(int idSupplier) {
+    public void setIdSupplier(String idSupplier) {
         this.idSupplier = idSupplier;
     }
 

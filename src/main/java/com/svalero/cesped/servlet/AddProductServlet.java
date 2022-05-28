@@ -30,35 +30,30 @@ public class AddProductServlet extends HttpServlet {
             response.sendRedirect("AccesoDenegado.jsp");
         }
 
-        //Product product = new Product();
-        //String nombre = request.getParameter("nombre");
-        //float precio = Float.parseFloat(request.getParameter("precio"));
-        //int stock = Integer.parseInt(request.getParameter("stock"));
-        String supplierId = request.getParameter("id");
+        String nombre = request.getParameter("nombre");
+        float precio = Float.parseFloat(request.getParameter("precio"));
+        int stock = Integer.parseInt(request.getParameter("stock"));
+        String supplierId = request.getParameter("idProveedor");
 
         Database database = new Database();
-        SupplierDao supplierDao = new SupplierDao(database.getConnection());
+        ProductDao productDao = new ProductDao(database.getConnection());
         try {
-            Optional<Supplier> supplier = supplierDao.findById(Integer.parseInt(supplierId));
-
-            Product product = new Product();
-            product.setName(request.getParameter("name"));
-            product.setPrice(Float.parseFloat(request.getParameter("price")));
-            product.setStock(Integer.parseInt(request.getParameter("stock")));
-
-            ProductDao productDao = new ProductDao(database.getConnection());
-            productDao.add(supplierId, product);
+            Product product = new Product(nombre.trim(), precio, stock, supplierId.trim());
+            productDao.add(product);
             out.println("<div class='alert alert-success' role='alert'>producto añadido correctamente</div>");
+            out.println("Parametro de proveedor: " + supplierId);
         } catch (SQLException sqle) {
             out.println("<div class='alert alert-success' role='alert'>Error de conexión.</div>");
             sqle.printStackTrace();
 
-
-
         }
     }
 }
-
+//product.setName(request.getParameter("name"));
+//product.setPrice(Float.parseFloat(request.getParameter("price")));
+// product.setStock(Integer.parseInt(request.getParameter("stock")));
+//Optional<Supplier> supplier = supplierDao.findById(Integer.parseInt(supplierId));
+//SupplierDao supplierDao = new SupplierDao(database.getConnection());
 /*Database database = new Database();
         SupplierDao supplierDao = new SupplierDao(database.getConnection());
         try {

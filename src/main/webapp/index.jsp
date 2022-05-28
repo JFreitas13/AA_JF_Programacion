@@ -31,7 +31,7 @@
         <li><a href="/sanfrei/showsuppliers.jsp">Listado de Proveedores</a></li>
         <li><a href="/sanfrei/searchsupplier.jsp">Buscar Proveedores</a></li>
         <li><a href="/sanfrei/products">Catálogo de Productos</a></li>
-        <li><a href="/sanfrei/searchproducts.jsp">Buscar un Producto</a></li>
+        <li><a href="/sanfrei/searchproduct.jsp">Buscar un Producto</a></li>
 
         <%
             if ((currentUser != null) && Objects.equals(currentUser.getRole(), "admin")) {

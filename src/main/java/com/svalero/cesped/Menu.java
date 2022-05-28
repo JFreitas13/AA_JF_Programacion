@@ -79,9 +79,9 @@ public class Menu {
                 case "8":
                     modifyProduct();
                     break;
-                case "9":
+                /*case "9":
                     showProduct();
-                    break;
+                    break;*/
                 case "10":
                     deleteProduct();
                     break;
@@ -186,7 +186,7 @@ public class Menu {
 
         System.out.println("Lista de proveedores");
         try {
-            ArrayList<Supplier> suppliers = supplierDao.findAllSupplier();
+            ArrayList<Supplier> suppliers = supplierDao.findAll();
             for (Supplier supplier : suppliers) {
                 System.out.println(supplier.getId() + " | " + supplier.getName() + " | " + supplier.getCif() + " | " + supplier.getPhone() + " | " + supplier.getEmail());
             }
@@ -235,7 +235,7 @@ public class Menu {
 
     }
 
-    private void showProduct() {
+   /* private void showProduct() {
         ProductDao productDao = new ProductDao(connection);
 
         System.out.println("Lista de productos");
@@ -249,7 +249,7 @@ public class Menu {
             sqlException.printStackTrace(); //quitar de la version final
         }
 
-    }
+    }*/
 
     //rehacer con id
     private void deleteProduct() {

@@ -18,7 +18,7 @@
         response.sendRedirect("AccesoDenegado.jsp");
     }
 
-    String supplierId = request.getParameter("id");
+    /*String supplierId = request.getParameter("id");
     Database database = new Database();
     SupplierDao supplierDao = new SupplierDao((database.getConnection()));
     Supplier supplier = null;
@@ -27,7 +27,7 @@
         supplier = optionalSupllier.get();
     } catch (SQLException sqle) {
         sqle.printStackTrace();
-    }
+    }*/
 
 %>
 
@@ -69,22 +69,18 @@
                 <label for="stock" class="form-label">Stock</label>
                 <input name="stock" type="text" class="form-control w-25" id="stock">
             </div>
-            <!--<div class="mb-2">
-                <label for="idproveedor" class="form-label">Id proveedor</label>
-                <input name="idproveedor" type="text" class="form-control w-25" id="idproveedor">
-            </div>-->
             <%
-                //Database database = new Database();
-                //Connection connection = database.getConnection();
+                Database database = new Database();
+                Connection connection = database.getConnection();
             %>
             <div class="form-label">
                 <label for="idProveedor">Proveedor</label>
-                <select class="form-control w-25" id="idProveedor" name="idProveedor" value="<% supplier.getId(); %>">
+                <select class="form-control w-25" id="idProveedor" name="idProveedor">
                     <option>Selecciona un Proveedor</option>
                     <%
-                        //SupplierDao supplierDao = new SupplierDao(database.getConnection());
-                        ArrayList<Supplier> suppliers = supplierDao.findAllSupplier();
-                        for (Supplier supplier1r : suppliers) {
+                        SupplierDao supplierDao = new SupplierDao(database.getConnection());
+                        ArrayList<Supplier> suppliers = supplierDao.findAll();
+                        for (Supplier supplier : suppliers) {
                             out.println("<option value=\"" + supplier.getId() + "\">" + supplier.getName() + "</option>");
                         }
                     %>

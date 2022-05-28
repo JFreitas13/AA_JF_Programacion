@@ -16,7 +16,7 @@ import java.util.List;
 
 @WebServlet("/books")
 public class GetProductsServlet extends HttpServlet {
-    @Override
+   /* @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -41,5 +41,6 @@ public class GetProductsServlet extends HttpServlet {
         }
         out.println("</div>");
     }
+}*/
 }
 
