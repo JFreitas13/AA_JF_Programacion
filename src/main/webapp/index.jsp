@@ -22,7 +22,7 @@
     <div class="container">
         <h2>APLICACIÓN SANFREI</h2>
         <div class="alert alert-success" role="alert">
-            Bienvenido <% if (currentUser != null) out.print(currentUser.getName()); %>
+            Bienvenido <% if (currentUser != null) out.print(currentUser.getName()); %>! </br> Aqui podrás gestionar clientes, proveedores y productos de la empresa.
         </div>
 
         <ul>

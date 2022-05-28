@@ -24,12 +24,12 @@
 </head>
 <body>
     <%
-        String clientDni = request.getParameter("dni");
+        String clientId = request.getParameter("idClient");
         Database database = new Database();
         ClientDao clientDao = new ClientDao((database.getConnection()));
         Client client = null;
         try {
-            Optional<Client> optionalClient = clientDao.findByDni(clientDni);
+            Optional<Client> optionalClient = clientDao.findById(Integer.parseInt(clientId));
             client = optionalClient.get();
 
     %>
@@ -40,7 +40,8 @@
                 <h5 class="card-title"><%= client.getName() + " " + client.getSurname() %></h5>
                 <h5 class="card-title"><%= client.getPhone() %></h5>
                 <h5 class="card-title"><%= client.getDni() %></h5>
-                <a href="client.jsp?phone=<%= client.getPhone() %>" class="btn btn-primary">Llamar</a>
+                <a href="client.jsp?phone=<%= client.getPhone() %>" class="btn btn-outline-primary">Llamar</a>
+                <a href="addclient.jsp?idClient=<%= client.getIdClient() %>" class="btn btn-outline-warning">Modificar</a>
                 <a href="deleteclient.jsp?dni=<%= client.getDni() %>" class="btn btn-outline-danger">Eliminar</a>
             </div>
         </div>

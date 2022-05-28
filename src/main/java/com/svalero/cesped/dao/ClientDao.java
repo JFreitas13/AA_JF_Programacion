@@ -43,7 +43,7 @@ public class ClientDao {
         return rows == 1;
     }
 
-  /*  public boolean deleteById(int idClient) throws SQLException {
+   public boolean deleteById(int idClient) throws SQLException {
         String sql = "DELETE FROM CLIENTES WHERE ID_CLIENTE = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -51,11 +51,11 @@ public class ClientDao {
         int rows = statement.executeUpdate();
 
         return rows == 1;
-    }*/
+    }
 
 
     public boolean modifyClient(String dni, Client client) throws SQLException {
-        String sql = "UPDATE CLIENT SET NOMBRE = ?, APELLIDOS = ?, DNI = ?, TELEFONO = ?, EMAIL = ?";
+        String sql = "UPDATE CLIENTES SET NOMBRE = ?, APELLIDOS = ?, DNI = ?, TELEFONO = ?, EMAIL = ? WHERE DNI = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, client.getName());
@@ -63,6 +63,21 @@ public class ClientDao {
         statement.setString(3, client.getDni());
         statement.setString(4, client.getPhone());
         statement.setString(5, client.getEmail());
+        statement.setString(4, dni);
+        int rows = statement.executeUpdate();
+        return rows == 1;
+    }
+
+    public boolean modifyById(int clientId, Client client) throws SQLException {
+        String sql = "UPDATE CLIENTES SET NOMBRE = ?, APELLIDOS = ?, DNI = ?, TELEFONO = ?, EMAIL = ? WHERE ID_CLIENTE = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, client.getName());
+        statement.setString(2, client.getSurname());
+        statement.setString(3, client.getDni());
+        statement.setString(4, client.getPhone());
+        statement.setString(5, client.getEmail());
+        statement.setInt(6, clientId);
         int rows = statement.executeUpdate();
         return rows == 1;
     }
@@ -117,21 +132,15 @@ public class ClientDao {
         return  Optional.ofNullable(client);
     }
 
-    public Optional<Client> findById(String idClient) throws SQLException {
+    public Optional<Client> findById(int idClient) throws SQLException {
         String sql = "SELECT * FROM CLIENTES WHERE ID_CLIENTE = ?";
         Client client = null;
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1,idClient);
+        statement.setInt(1, idClient);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
-            client = new Client();
-            client.setIdClient(Integer.parseInt(resultSet.getString("ID_CLIENTE")));
-            client.setName(resultSet.getString("NOMBRE"));
-            client.setSurname(resultSet.getString("APELLIDOS"));
-            client.setDni(resultSet.getString("DNI"));
-            client.setPhone(resultSet.getString("TELEFONO"));
-            client.setEmail(resultSet.getString("EMAIL"));
+            client = fromResultSet(resultSet);
         }
         return  Optional.ofNullable(client);
     }

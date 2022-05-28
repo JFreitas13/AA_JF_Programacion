@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet("/add-client")
-public class AddClientServlet extends HttpServlet {
+@WebServlet("/add-modify-client")
+public class AddModifyClientServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,13 +33,20 @@ public class AddClientServlet extends HttpServlet {
         String dni = request.getParameter("dni");
         String phone = request.getParameter("telefono");
         String email = request.getParameter("email");
+        String action = request.getParameter("action");
+        String clientId = request.getParameter("clientId");
         Client client = new Client(nombre, surname, dni, phone, email); //creo el cliente
 
         Database database = new Database();
         ClientDao clientDao = new ClientDao(database.getConnection());
         try {
-            clientDao.addClient(client);
-            out.println("<div class='alert alert-success' role='alert'>El cliente se ha añadido correctamente</div>");
+            if (action.equals("register")) {
+                clientDao.addClient(client);
+                out.println("<div class='alert alert-success' role='alert'>El cliente se ha añadido correctamente</div>");
+            } else {
+                clientDao.modifyById(Integer.parseInt(clientId), client); //paso id y nuevo cliente creado arriba
+                out.println("<div class='alert alert-success' role='alert'>El cliente se ha modificado correctamente</div>");
+            }
         } catch (ClientAlreadyExistException caee) {
             out.println("<div class='alert alert-warning' role='alert'>El cliente ya está registrado en el sistema.</div>");
         } catch (SQLException sqle) {

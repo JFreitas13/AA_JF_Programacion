@@ -25,6 +25,9 @@
 <body>
 <div class="container">
     <h2>Listado de clientes</h2>
+    <div class="alert alert-secondary" role="alert">
+        Para ver información más detallada del cliente pincha en él.
+    </div>
     <ul class="list-group">
         <%
             // Acceder a la base de datos y recuperar la información de los clientes
@@ -35,7 +38,7 @@
                 for (Client client : clients) {
         %>
                     <li class="list-group-item">
-                    <a target="_blank" href="client.jsp?dni=<%= client.getDni() %>"><%= client.getName() + " " + client.getSurname()  %></a>
+                    <a target="_blank" href="client.jsp?idClient=<%= client.getIdClient() %>"><%= client.getName() + " " + client.getSurname()  %></a>
                     </li>
         <%
             }
