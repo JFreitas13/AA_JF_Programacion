@@ -17,18 +17,6 @@
     if (currentUser == null) {
         response.sendRedirect("AccesoDenegado.jsp");
     }
-
-    /*String supplierId = request.getParameter("id");
-    Database database = new Database();
-    SupplierDao supplierDao = new SupplierDao((database.getConnection()));
-    Supplier supplier = null;
-    try {
-        Optional<Supplier> optionalSupllier = supplierDao.findById(Integer.parseInt(supplierId));
-        supplier = optionalSupllier.get();
-    } catch (SQLException sqle) {
-        sqle.printStackTrace();
-    }*/
-
 %>
 
 
@@ -54,6 +42,9 @@
 
     <div class="container">
         <h2>Añadir producto</h2>
+        <div class="alert alert-secondary" role="alert">
+            Todos los campos son obligatórios.
+        </div>
 
         <form>
             <div class="mb-2">
@@ -89,6 +80,7 @@
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
         <div id="result"></div>
+        <a href="index.jsp" class="btn btn-primary">Menú Principal</a>
     </div>
 
 </body>

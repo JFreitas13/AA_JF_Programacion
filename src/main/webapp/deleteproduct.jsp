@@ -39,7 +39,7 @@
         });
     </script>
     <%
-        String productId = request.getParameter("id");
+        String productId = request.getParameter("idProduct");
         Database database = new Database();
         ProductDao productDao = new ProductDao((database.getConnection()));
         Product product = null;
@@ -53,7 +53,7 @@
             <div class="card-header">¿Estás seguro que quieres eliminar el producto?</div>
             <div class="card-body">
                 <a href="delete-product?idProduct=<%= product.getIdProduct() %>" class="btn btn-danger">Si</a>
-                <a href="showsuppliers.jsp?idProduct<%= product.getIdProduct() %>" class="btn btn-outline-danger">No</a>
+                <a href="showproducts.jsp?idProduct<%= product.getIdProduct() %>" class="btn btn-outline-danger">No</a>
             </div>
         </div>
     </div>

@@ -82,9 +82,9 @@ public class Menu {
                 /*case "9":
                     showProduct();
                     break;*/
-                case "10":
+                /*case "10":
                     deleteProduct();
-                    break;
+                    break;*/
                 case "11":
                     addClient();
                     break;
@@ -252,7 +252,7 @@ public class Menu {
     }*/
 
     //rehacer con id
-    private void deleteProduct() {
+    /*private void deleteProduct() {
         System.out.println("Indicar nombre del producto a eliminar: ");
         String name = keyboard.nextLine();
         ProductDao productDao = new ProductDao(connection);
@@ -265,7 +265,7 @@ public class Menu {
         } catch (SQLException sqle) {
             System.out.println("Error de conexión. Verifica que los datos son correctos.");
         }
-    }
+    }*/
 
     private void addClient() {
         ClientDao clientDao = new ClientDao(connection);

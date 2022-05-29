@@ -36,7 +36,7 @@
             Database database = new Database();
             SupplierDao supplierDao = new SupplierDao(database.getConnection());
             try {
-                List<Supplier> suppliers = supplierDao.findAllSupplier();
+                List<Supplier> suppliers = supplierDao.findAll();
                 for (Supplier supplier : suppliers) {
         %>
                     <li class="list-group-item">
@@ -55,7 +55,7 @@
             }
         %>
     </ul>
-    <a href="index.jsp" class="btn btn-primary">Volver</a>
+    <a href="index.jsp" class="btn btn-primary">Menú Principal</a>
 </div>
 </body>
 </html>

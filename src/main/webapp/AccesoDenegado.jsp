@@ -10,7 +10,7 @@
     <title>Aplicación Sanfrei</title>
 </head>
 <body>
-    <div class="alert alert-danger" role="alert"<
+    <div class="alert alert-danger" role="alert">
         <h2>No tienes permiso para realizar esta acción.</h2>
     </div>
 </body>

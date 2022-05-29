@@ -1,8 +1,6 @@
 package com.svalero.cesped.dao;
 
-import com.svalero.cesped.domain.Client;
 import com.svalero.cesped.domain.Product;
-import com.svalero.cesped.domain.Supplier;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,15 +44,15 @@ public class ProductDao {
         return rows == 1;
     }
 
-    public boolean delete(String name) throws SQLException {
-        String sql = "DELETE FROM PRODUCTOS WHERE NOMBRE = ?";
+    /*public boolean deleteById(int idProduct) throws SQLException {
+        String sql = "DELETE FROM PRODUCTOS WHERE ID_PRODUCTO = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, name);
+        statement.setInt(1, idProduct);
         int rows = statement.executeUpdate();
 
         return rows == 1;
-    }
+    }*/
 
     //listar todos los productos
     public ArrayList<Product> findAllProduct() throws SQLException {
@@ -125,7 +123,7 @@ public class ProductDao {
     }
 
     public boolean deleteById(int idProduct) throws SQLException {
-        String sql = "DELETE FROM PRODUCTO WHERE ID_PRODUCTO = ?";
+        String sql = "DELETE FROM PRODUCTOS WHERE ID_PRODUCTO = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, String.valueOf(idProduct));

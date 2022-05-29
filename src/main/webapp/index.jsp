@@ -36,7 +36,7 @@
         <%
             if ((currentUser != null) && Objects.equals(currentUser.getRole(), "admin")) {
         %>
-                <li><a href="/sanfrei/addproduct.jsp">Registrar un Producto</a></li>
+                <li><a href="/sanfrei/addproduct.jsp">Añadir un Producto</a></li>
                 <li><a href="/sanfrei/addclient.jsp">Añadir Cliente</a></li>
                 <li><a href="/sanfrei/addsupplier.jsp">Añadir Proveedor</a></li>
         <%
