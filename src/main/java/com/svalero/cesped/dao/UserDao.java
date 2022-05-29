@@ -12,10 +12,12 @@ public class UserDao {
 
     private Connection connection;
 
+    //Constructor para conectar a la BBDD
     public UserDao(Connection connection) {
         this.connection = connection;
     }
 
+    //Metodo para obtener un usuario y una contraseña concreto. Pendiento encripat pass.
     public Optional<User> login(String username, String password) throws SQLException {
         String sql = "SELECT * FROM USUARIOS WHERE USERNAME = ? AND PASS = ?";
         User user = null;

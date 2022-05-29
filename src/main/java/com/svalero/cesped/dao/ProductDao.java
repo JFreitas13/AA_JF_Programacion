@@ -13,10 +13,12 @@ public class ProductDao {
 
     private Connection connection;
 
+    //Constructor para conectar a la BBDD
     public ProductDao(Connection connection) {
         this.connection = connection;
     }
 
+    //Metodo para añadir Productos
     public void add(Product product) throws SQLException {
         String sql = "INSERT INTO PRODUCTOS (NOMBRE, PRECIO, STOCK, ID_PROVEEDOR) VALUES (?, ?, ?, ?)";
 
@@ -26,10 +28,9 @@ public class ProductDao {
             statement.setInt(3, product.getStock());
             statement.setString(4, product.getIdSupplier());
             statement.executeUpdate();
-
-        System.out.println("Producto sql: " + product.getIdSupplier());
     }
 
+    //Metodo para modificar Productos. No usado en la AA
     public boolean modify(Product product) throws SQLException {
         String sql = "UPDATE PRODUCTOS INTO NOMBRE = ?, PRECIO = ?, STOCK = ?, ID_PROVEEDOR = ?";
 
@@ -38,13 +39,13 @@ public class ProductDao {
         statement.setFloat(2, product.getPrice());
         statement.setInt(3, product.getStock());
         statement.setString(4, String.valueOf(product.getSupplier()));
-
         int rows = statement.executeUpdate();
 
         return rows == 1;
     }
 
-    /*public boolean deleteById(int idProduct) throws SQLException {
+    //Metodo para eliminar Productos sabiendo el id.
+    public boolean deleteById(int idProduct) throws SQLException {
         String sql = "DELETE FROM PRODUCTOS WHERE ID_PRODUCTO = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -52,9 +53,9 @@ public class ProductDao {
         int rows = statement.executeUpdate();
 
         return rows == 1;
-    }*/
+    }
 
-    //listar todos los productos
+    //Metodo para buscar y listar todos los productos
     public ArrayList<Product> findAllProduct() throws SQLException {
         String sql = "SELECT * FROM PRODUCTOS ORDER BY NOMBRE";
         ArrayList<Product> products = new ArrayList<>();
@@ -65,8 +66,11 @@ public class ProductDao {
             Product product = fromResultSet(resultSet);
             products.add(product);
         }
+
         return products;
     }
+
+    //Metodo para buscar y listar producto en función del texto que indique el usuario. Se buscará el todas las columnas.
     public ArrayList<Product> findAllProduct(String searchText) throws SQLException {
         String sql = "SELECT * FROM PRODUCTOS INSTR(NOMBRE, ?) != 0 OR INSTR(PRECIO, ?) != 0 OR INSTR(STOCK, ?) != 0 OR INSTR(ID_PROVEEDOR, ?) != 0 ORDER BY nombre";
         ArrayList<Product> products = new ArrayList<>();
@@ -86,6 +90,7 @@ public class ProductDao {
         return products;
     }
 
+    //Método para buscar por Nombre
     public Optional<Product> findByName(String name) throws SQLException {
         String sql = "SLECT * FROM PRODUCTOS WHERE NOMBRE = ?";
         Product product = null;
@@ -99,17 +104,18 @@ public class ProductDao {
             product.setName(resultSet.getString("NOMBRE"));
             product.setPrice(resultSet.getFloat("PRECIO"));
             product.setStock(resultSet.getInt("STOCK"));
-            //product.setIdSupplier(resultSet.getInt("ID_PROVEEDOR"));
         }
+
         return Optional.ofNullable(product);
     }
 
-    public Optional<Product> findById(int id) throws SQLException {
+    //Método para buscar por id.
+    public Optional<Product> findById(int idProduct) throws SQLException {
         String sql = "SELECT * FROM PRODUCTOS WHERE ID_PRODUCTO = ?";
         Product product = null;
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, String.valueOf(id));
+        statement.setInt(1, idProduct);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             product = new Product();
@@ -119,19 +125,11 @@ public class ProductDao {
             product.setStock(resultSet.getInt("STOCK"));
             product.setIdSupplier(resultSet.getString("ID_PROVEEDOR"));
         }
+
         return Optional.ofNullable(product);
     }
 
-    public boolean deleteById(int idProduct) throws SQLException {
-        String sql = "DELETE FROM PRODUCTOS WHERE ID_PRODUCTO = ?";
-
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, String.valueOf(idProduct));
-        int rows = statement.executeUpdate();
-
-        return rows == 1;
-    }
-
+    //Metodo para usar en los listados que devuelven ResultSet
     private Product fromResultSet(ResultSet resultSet) throws SQLException {
         Product product = new Product();
         product.setIdProduct(resultSet.getInt("id_producto"));

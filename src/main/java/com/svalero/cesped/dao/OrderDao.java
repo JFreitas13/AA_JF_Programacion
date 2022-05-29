@@ -18,7 +18,7 @@ public class OrderDao {
         this.connection = connection;
     }
 
-    //TODO CLASE ORDERDAO
+    //TODO CLASE ORDERDAO. No usada en la AA
     public void add(Client client, List<Product> products, Order order) throws SQLException {
       /*  String sql = "INSERT INTO PEDIDOS (ID_CLIENTE, ID_PRODUCTO, FE_COMPRA, CANTIDAD) VALUES (?, ?, ?, ?)";
 
@@ -56,5 +56,3 @@ public class OrderDao {
     }
 }
 
-
-    //TODO (CRUD: Create Read Update Delete)
