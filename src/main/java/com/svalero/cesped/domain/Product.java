@@ -1,28 +1,39 @@
 package com.svalero.cesped.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Product {
 
-    //private int id;
+    private int idProduct;
     private String name;
     private float price;
     private int stock;
-    private String supplier;
+    private String idSupplier;
 
-    public Product(String name, float price, int stock, String supplier) {
-        //this.id = id;
+    private Supplier supplier; //para relacionar con Supplier
+
+    //private List<Order> orders; //relacionar productos con pedidos. No usado en la AA
+
+    public Product() {
+        //orders = new ArrayList<>(); //si creo un producto nuevo debo inicializar el array //No usado en la AA
+    }
+
+    public Product(String name, float price, int stock, String idSupplier) {
         this.name = name;
         this.price = price;
         this.stock = stock;
-        this.supplier = supplier;
+        this.idSupplier = idSupplier;
+        //orders = new ArrayList<>(); //No usado en la AA
     }
 
-    //public int getId() {
-    //    return id;
-   // }
+    public int getIdProduct() {
+        return idProduct;
+    }
 
-    //public void setId(int id) {
-    //    this.id = id;
-   // }
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
+    }
 
     public String getName() {
         return name;
@@ -48,11 +59,20 @@ public class Product {
         this.stock = stock;
     }
 
-    public String getSupplier() {
+    public String getIdSupplier() {
+        return idSupplier;
+    }
+
+    public void setIdSupplier(String idSupplier) {
+        this.idSupplier = idSupplier;
+    }
+
+    public Supplier getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(String supplier) {
+    public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
+
 }

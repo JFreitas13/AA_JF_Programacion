@@ -1,26 +1,33 @@
 package com.svalero.cesped.domain;
 
+import java.util.List;
+
 public class Supplier {
 
-    private String id;
+    private int id;
     private String name;
     private String cif;
     private String phone;
     private String email;
 
-    public Supplier (String id, String name, String cif, String phone, String email) {
-        this.id = id;
+    private List<Product> products;
+
+    public Supplier() {
+
+    }
+
+    public Supplier(String name, String cif, String phone, String email) {
         this.name = name;
         this.cif = cif;
         this.phone = phone;
         this.email = email;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
