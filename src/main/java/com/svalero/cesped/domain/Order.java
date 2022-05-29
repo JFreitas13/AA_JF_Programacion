@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+//Clase no usada en la AA
 public class Order {
 
     private int idOrder;
-    //private int idClient;
-   // private int idProduct;
+    private int idClient;
+    private int idProduct;
     private LocalDate date;
     private float cantidad;
 
@@ -19,7 +20,6 @@ public class Order {
         products = new ArrayList<>();
     }
 
-    //TODO REVISAR CLASE ORDER
     public Order(LocalDate date, float cantidad, Client client) {
         this.date = date;
         this.cantidad = cantidad;
@@ -35,21 +35,21 @@ public class Order {
         this.idOrder = idOrder;
     }
 
-   /* public int getIdClient() {
+   public int getIdClient() {
         return idClient;
     }
 
     public void setIdClient(int idClient) {
         this.idClient = idClient;
-    }*/
+    }
 
-    /*public int getIdProduct() {
+    public int getIdProduct() {
         return idProduct;
     }
 
     public void setIdProduct(int idProduct) {
         this.idProduct = idProduct;
-    }*/
+    }
 
     public LocalDate getDate() {
         return date;

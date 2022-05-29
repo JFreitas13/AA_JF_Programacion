@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+//No usado en la AA
 public class Menu {
 
     private Scanner keyboard;
@@ -79,12 +80,12 @@ public class Menu {
                 case "8":
                     modifyProduct();
                     break;
-                case "9":
+                /*case "9":
                     showProduct();
-                    break;
-                case "10":
+                    break;*/
+                /*case "10":
                     deleteProduct();
-                    break;
+                    break;*/
                 case "11":
                     addClient();
                     break;
@@ -94,9 +95,9 @@ public class Menu {
                 case "13":
                     showClient();
                     break;
-                case "14":
+                /*case "14":
                     deleteClient();
-                    break;
+                    break;*/
             }
         } while (!choice.equals("15"));
 
@@ -186,7 +187,7 @@ public class Menu {
 
         System.out.println("Lista de proveedores");
         try {
-            ArrayList<Supplier> suppliers = supplierDao.findAllSupplier();
+            ArrayList<Supplier> suppliers = supplierDao.findAll();
             for (Supplier supplier : suppliers) {
                 System.out.println(supplier.getId() + " | " + supplier.getName() + " | " + supplier.getCif() + " | " + supplier.getPhone() + " | " + supplier.getEmail());
             }
@@ -235,7 +236,7 @@ public class Menu {
 
     }
 
-    private void showProduct() {
+   /* private void showProduct() {
         ProductDao productDao = new ProductDao(connection);
 
         System.out.println("Lista de productos");
@@ -249,10 +250,10 @@ public class Menu {
             sqlException.printStackTrace(); //quitar de la version final
         }
 
-    }
+    }*/
 
     //rehacer con id
-    private void deleteProduct() {
+    /*private void deleteProduct() {
         System.out.println("Indicar nombre del producto a eliminar: ");
         String name = keyboard.nextLine();
         ProductDao productDao = new ProductDao(connection);
@@ -265,7 +266,7 @@ public class Menu {
         } catch (SQLException sqle) {
             System.out.println("Error de conexión. Verifica que los datos son correctos.");
         }
-    }
+    }*/
 
     private void addClient() {
         ClientDao clientDao = new ClientDao(connection);
@@ -304,7 +305,7 @@ public class Menu {
         ClientDao clientDao = new ClientDao(connection);
 
         System.out.println("Lista de clientes");
-        try {
+       /* try {
             ArrayList<Client> clients = clientDao.findAllClient();
             for (Client client : clients) {
                 System.out.println(client.getIdClient() + " | " + client.getName() + " | " + client.getSurname() + " | " + client.getDni() + " | " + client.getPhone() + " | " + client.getEmail());
@@ -312,16 +313,16 @@ public class Menu {
         } catch (SQLException sqlException) {
             System.out.println("Error de conexión. Verifica que los datos son correctos.");
             sqlException.printStackTrace(); //quitar de la version final
-        }
+        }*/
     }
 
     //rehacer con id
-    private void deleteClient() {
+    /*private void deleteClient() {
         System.out.println("Indicar DNI del cliente a eliminar: ");
         String dni = keyboard.nextLine();
         ClientDao clientDao = new ClientDao(connection);
         try {
-            boolean deleted = clientDao.deleteClient(dni);
+            boolean deleted = clientDao.deleteClient();
             if (deleted)
                 System.out.println("El cliente se ha eliminado correctamente");
             else
@@ -329,5 +330,5 @@ public class Menu {
         } catch (SQLException sqle) {
             System.out.println("Error de conexión. Verifica que los datos son correctos.");
         }
-    }
+    }*/
 }

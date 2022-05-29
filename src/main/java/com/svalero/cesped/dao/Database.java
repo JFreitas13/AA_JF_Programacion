@@ -8,6 +8,7 @@ import static com.svalero.cesped.util.Constants.*;
 
 public class Database {
 
+    //Constructor para conectar a la BBDD
     private Connection connection;
 
     public Connection getConnection() {
@@ -16,7 +17,7 @@ public class Database {
             connection = DriverManager.getConnection(ORACLE_URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException cnfe) {
             System.out.println("No se ha podido cargar el driver de conexión. Verifique que todo esta correcto.");
-            cnfe.printStackTrace(); //me dice que linea de codigo ha fallado
+            cnfe.printStackTrace(); //me dice que linea de codigo ha fallado. Se recomienda quitarlo de la versión final
         } catch (SQLException sqle) {
             System.out.println("No se ha podido conectar con la bases de datos. Verifique que todos los datos con correctos.");
             sqle.printStackTrace();
@@ -29,7 +30,7 @@ public class Database {
         try {
             connection.close();
         } catch (SQLException sqle) {
-            System.out.println("No se ha podido conectar con la bases de datos. Verifique que todos los datos con correctos.");
+            System.out.println("No se ha podido conectar con la base de dato. Verifique que todos los datos con correctos.");
             sqle.printStackTrace();
         }
     }

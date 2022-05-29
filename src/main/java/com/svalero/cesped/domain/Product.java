@@ -9,22 +9,22 @@ public class Product {
     private String name;
     private float price;
     private int stock;
-    //private int idSupplier;
+    private String idSupplier;
 
     private Supplier supplier; //para relacionar con Supplier
 
-    private List<Order> orders; //relacionar productos con pedidos
+    //private List<Order> orders; //relacionar productos con pedidos. No usado en la AA
 
     public Product() {
-        orders = new ArrayList<>(); //si creo un producto nuevo debo inicializar el array
+        //orders = new ArrayList<>(); //si creo un producto nuevo debo inicializar el array //No usado en la AA
     }
 
-    public Product(String name, float price, int stock, Supplier supplier) {
+    public Product(String name, float price, int stock, String idSupplier) {
         this.name = name;
         this.price = price;
         this.stock = stock;
-        this.supplier = supplier;
-        orders = new ArrayList<>();
+        this.idSupplier = idSupplier;
+        //orders = new ArrayList<>(); //No usado en la AA
     }
 
     public int getIdProduct() {
@@ -59,13 +59,13 @@ public class Product {
         this.stock = stock;
     }
 
-    /*public int getIdSupplier() {
+    public String getIdSupplier() {
         return idSupplier;
     }
 
-    public void setIdSupplier(int idSupplier) {
+    public void setIdSupplier(String idSupplier) {
         this.idSupplier = idSupplier;
-    }*/
+    }
 
     public Supplier getSupplier() {
         return supplier;
