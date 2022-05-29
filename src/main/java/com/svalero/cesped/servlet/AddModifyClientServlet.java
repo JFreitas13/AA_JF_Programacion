@@ -42,7 +42,7 @@ public class AddModifyClientServlet extends HttpServlet {
         try {
             if (action.equals("register")) {
                 clientDao.addClient(client);
-                out.println("<div class='alert alert-success' role='alert'>El cliente se ha añadido correctamente \n <a href='showclients.jsp' >Listado Clientes</a>");
+                out.println("<div class='alert alert-success' role='alert'>El cliente se ha añadido correctamente. \n <a href='showclients.jsp' >Listado Clientes</a>");
             } else {
                 clientDao.modifyById(Integer.parseInt(clientId), client); //paso id y nuevo cliente creado arriba
                 out.println("<div class='alert alert-success' role='alert'>El cliente se ha modificado correctamente. \n <a href='showclients.jsp' >Listado Clientes</a>");
