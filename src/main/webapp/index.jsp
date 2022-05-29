@@ -6,6 +6,7 @@
 %>
 <%@ page import="java.util.Objects" %>
 
+<!-- Recuperamos la sesion y si es null lo llevamos a login.jsp -->
 <%
         User currentUser = (User) session.getAttribute("currentUser");
         if (currentUser == null) {

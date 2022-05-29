@@ -44,6 +44,7 @@
     <title>Añadir cliente</title>
 </head>
 <body>
+    <!-- Código para enviar el formulario de forma asíncrona -->
     <script type="text/javascript">
         $(document).ready(function () {
             $("form").on("submit", function (event) {
@@ -88,7 +89,7 @@
             <input type="hidden" name="clientId" value="<% if (client != null) out.print(client.getIdClient()); %>"> <!--campo oculto. Enviar valor definido internamente-->
             <button type="submit" class="btn btn-success"><%= textBouton %></button>
         </form>
-        <div id="result"></div>
+        <div id="result"></div> <!-- Resultado del envio asincrono con AJAX -->
         <a href="index.jsp" class="btn btn-primary">Menú Principal</a>
     </div>
 </body>
