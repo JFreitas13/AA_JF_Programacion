@@ -155,7 +155,7 @@ public class ClientDao {
         return client.isPresent();
     }
 
-    //TODO QUITAMOS DE LA AA?
+    //no usado en AA
     public Optional<Client> getCliente (String phone)  throws SQLException {
         String sql = "SELECT * FROM CLIENTES WHERE PHONE = ?";
         Client client = null;
