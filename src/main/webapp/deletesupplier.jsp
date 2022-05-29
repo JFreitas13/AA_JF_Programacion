@@ -23,6 +23,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- libreria de ajax es como una libreria de js con cosas ya hechas -->
+    <title>Eliminar Proveedor</title>
 </head>
 <body>
     <script type="text/javascript">
@@ -60,7 +61,7 @@
     <%
     } catch (SQLException sqle) {
     %>
-    <div class='alert alert-danger' role='alert'>Se ha producido un error. intentalo más tarde</div>
+    <div class='alert alert-danger' role='alert'>No se ha podido conectar con la base de datos. Verifique que todos los datos son correctos.</div>
     <%
         }
     %>

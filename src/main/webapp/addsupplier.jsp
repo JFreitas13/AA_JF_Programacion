@@ -41,6 +41,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- libreria de ajax es como una libreria de js con cosas ya hechas -->
+    <title>Añadir proveedor</title>
 </head>
 <body>
     <script type="text/javascript">

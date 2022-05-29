@@ -82,8 +82,8 @@ public class ClientDao {
         ArrayList<Client> clients = new ArrayList<>();
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
+        ResultSet resultSet = statement.executeQuery(); //cursor. objeto que apunta a to do el contenido de la tabla
+        while (resultSet.next()) { //mientras haya datos
             Client client = fromResultSet(resultSet);
             clients.add(client);
         }

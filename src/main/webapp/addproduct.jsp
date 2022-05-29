@@ -26,6 +26,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- libreria de ajax es como una libreria de js con cosas ya hechas -->
+    <title>Añadir producto</title>
 </head>
 <body>
     <script type="text/javascript">
@@ -49,16 +50,16 @@
         <form>
             <div class="mb-2">
                 <label for="nombre" class="form-label">Nombre del producto</label>
-                <input name="nombre" type="text" class="form-control w-25" id="nombre">
+                <input name="nombre" type="text" class="form-control w-25" id="nombre" required>
                 <!-- input name es lo importante para poder coger las variables con java -->
             </div>
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio</label>
-                <input name="precio" type="text" class="form-control w-25" id="precio">
+                <input name="precio" type="text" class="form-control w-25" id="precio" required>
             </div>
             <div class="mb-2">
                 <label for="stock" class="form-label">Stock</label>
-                <input name="stock" type="text" class="form-control w-25" id="stock">
+                <input name="stock" type="text" class="form-control w-25" id="stock" required>
             </div>
             <%
                 Database database = new Database();
@@ -66,7 +67,7 @@
             %>
             <div class="form-label">
                 <label for="idProveedor">Proveedor</label>
-                <select class="form-control w-25" id="idProveedor" name="idProveedor">
+                <select class="form-control w-25" id="idProveedor" name="idProveedor" required>
                     <option>Selecciona un Proveedor</option>
                     <%
                         SupplierDao supplierDao = new SupplierDao(database.getConnection());

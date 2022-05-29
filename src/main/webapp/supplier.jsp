@@ -43,6 +43,7 @@
                 <a href="addsupplier.jsp?id=<%= supplier.getId() %>" class="btn btn-outline-warning">Modificar</a>
                 <a href="deletesupplier.jsp?id=<%= supplier.getId() %>" class="btn btn-outline-danger">Eliminar</a>
             </div>
+            <a href="showsuppliers.jsp" class="btn btn-primary">Volver</a>
         </div>
     </div>
     <%

@@ -25,7 +25,7 @@
         Database database = new Database();
         ClientDao clientDao = new ClientDao(database.getConnection());
         try {
-            Optional<Client> optionalClient = clientDao.findById(Integer.parseInt(clientId)); //recuperar un cliente con determinado DNI
+            Optional<Client> optionalClient = clientDao.findById(Integer.parseInt(clientId)); //recuperar un cliente con determinado id
             client = optionalClient.get();
         } catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -41,6 +41,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- libreria de ajax es como una libreria de js con cosas ya hechas -->
+    <title>Añadir cliente</title>
 </head>
 <body>
     <script type="text/javascript">
@@ -88,8 +89,7 @@
             <button type="submit" class="btn btn-success"><%= textBouton %></button>
         </form>
         <div id="result"></div>
-        <a href="index.jsp" class="btn btn-primary">Volver</a>
-
+        <a href="index.jsp" class="btn btn-primary">Menú Principal</a>
     </div>
 </body>
 </html>
