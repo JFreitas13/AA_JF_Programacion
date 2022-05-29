@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+//Clase no usada en la AA
 public class Order {
 
     private int idOrder;
@@ -19,7 +20,6 @@ public class Order {
         products = new ArrayList<>();
     }
 
-    //TODO REVISAR CLASE ORDER
     public Order(LocalDate date, float cantidad, Client client) {
         this.date = date;
         this.cantidad = cantidad;

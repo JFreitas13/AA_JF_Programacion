@@ -2,9 +2,7 @@ package com.svalero.cesped.servlet;
 
 import com.svalero.cesped.dao.Database;
 import com.svalero.cesped.dao.ProductDao;
-import com.svalero.cesped.dao.SupplierDao;
 import com.svalero.cesped.domain.Product;
-import com.svalero.cesped.domain.Supplier;
 import com.svalero.cesped.domain.User;
 
 import javax.servlet.ServletException;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Optional;
 
 @WebServlet("/add-product")
 public class AddProductServlet extends HttpServlet {
@@ -40,26 +37,11 @@ public class AddProductServlet extends HttpServlet {
         try {
             Product product = new Product(nombre.trim(), precio, stock, supplierId.trim());
             productDao.add(product);
-            out.println("<div class='alert alert-success' role='alert'>producto añadido correctamente</div>");
-            out.println("Parametro de proveedor: " + supplierId);
+            out.println("<div class='alert alert-success' role='alert'>Producto añadido correctamente</div> \n <a href='showproducts.jsp' class='btn btn-primary'>Listado Productos</a>");
         } catch (SQLException sqle) {
-            out.println("<div class='alert alert-success' role='alert'>Error de conexión.</div>");
+            out.println("<div class='alert alert-success' role='alert'>No se ha podido conectar con la base de datos. Verifique que todos los datos son correctos.</div>");
             sqle.printStackTrace();
 
         }
     }
 }
-//product.setName(request.getParameter("name"));
-//product.setPrice(Float.parseFloat(request.getParameter("price")));
-// product.setStock(Integer.parseInt(request.getParameter("stock")));
-//Optional<Supplier> supplier = supplierDao.findById(Integer.parseInt(supplierId));
-//SupplierDao supplierDao = new SupplierDao(database.getConnection());
-/*Database database = new Database();
-        SupplierDao supplierDao = new SupplierDao(database.getConnection());
-        try {
-          supplierDao.findByCif(proveedor);
-          out.println("<div class='alert alert-success' role='alert'>El producto se ha añadido correctamente</div>");
-        } catch (SQLException sqle) {
-            out.println("<div class='alert alert-success' role='alert'>proveedor no encontrado</div>");
-            sqle.printStackTrace();
-        }*/

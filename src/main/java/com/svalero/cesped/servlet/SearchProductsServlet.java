@@ -37,9 +37,8 @@ public class SearchProductsServlet extends HttpServlet {
             result.append("</ul>");
             out.println(result);
         } catch (SQLException sqle) {
-            out.println("<div class='alert alert-danger' role='alert'>Error de conexión a BBDD</div>");
-            sqle.printStackTrace(); //TODO QUITAR ESTO DE LA VERSION FINAL
+            out.println("<div class='alert alert-danger' role='alert'>No se ha podido conectar con la base de datos. Verifique que todos los datos son correctos.</div>");
+            sqle.printStackTrace();
         }
     }
 }
-//TODO TERMINAR

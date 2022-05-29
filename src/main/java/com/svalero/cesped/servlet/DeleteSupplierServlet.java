@@ -32,9 +32,9 @@ public class DeleteSupplierServlet extends HttpServlet {
         SupplierDao supplierDao = new SupplierDao(database.getConnection());
         try {
             supplierDao.deleteById(Integer.parseInt(supplierId));
-            out.println("<div class='alert alert-success' role='alert'>El proveedor se ha borrado correctamente</div>");
+            out.println("<div class='alert alert-success' role='alert'>El proveedor se ha borrado correctamente</div> \n <a href='showsuppliers.jsp' class='btn btn-primary'>Listado Proveedores");
         } catch (SQLException sqle) {
-            out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error al eliminar el proveedor. Intentalo más tarde</div>");
+            out.println("<div class='alert alert-danger' role='alert'>No se ha podido conectar con la base de datos. Verifique que todos los datos son correctos.</div>");
             sqle.printStackTrace(); //TODO BORRAR DE LA VERSION FINAL
 
         }

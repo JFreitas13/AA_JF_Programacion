@@ -35,9 +35,8 @@ public class SearchClientServlet extends HttpServlet {
             result.append("</ul>");
             out.println(result);
         } catch (SQLException sqle) {
-            out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error. Intentalo más tarde</div>");
-            sqle.printStackTrace(); //TODO QUITAR ESTO DE LA VERSION FINAL
+            out.println("<div class='alert alert-danger' role='alert'>No se ha podido conectar con la base de datos. Verifique que todos los datos son correctos.</div>");
+            sqle.printStackTrace();
         }
     }
 }
-//TODO MEJORAR BUSCADOR

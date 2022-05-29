@@ -41,15 +41,15 @@ public class AddModifySupplierServlet extends HttpServlet {
         try {
             if (action.equals("register")) {
                 supplierDao.addSupplier(supplier);
-                out.println("<div class='alert alert-success' role='alert'>El proveedor se ha añadido correctamente</div>");
+                out.println("<div class='alert alert-success' role='alert'>El proveedor se ha añadido correctamente</div> \n <a href='showsuppliers.jsp' class='btn btn-primary'>Listado Proveedores</a>");
             } else {
                 supplierDao.modifyById(Integer.parseInt(supplierId), supplier);
-                out.println("<div class='alert alert-success' role='alert'>El proveedor se ha modificado correctamente</div>");
+                out.println("<div class='alert alert-success' role='alert'>El proveedor se ha modificado correctamente</div> \n <a href='showsuppliers.jsp' class='btn btn-primary'>Listado Proveedores</a>");
             }
         } catch (SupplierAlreadyExistException saee) {
-            out.println("<div class='alert alert-warning' role='alert'>El proveedor ya está registrado en el sistema.</div>");
+            out.println("<div class='alert alert-warning' role='alert'>El proveedor ya está registrado en el sistema.</div> \n <a href='showsuppliers.jsp' class='btn btn-primary'>Listado Proveedores</a>");
         } catch (SQLException sqle) {
-            out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error al registrar el cliente. Intentalo más tarde</div>");
+            out.println("<div class='alert alert-danger' role='alert'>No se ha podido conectar con la base de datos. Verifique que todos los datos son correctos.</div>");
             sqle.printStackTrace(); //TODO QUITAR DE LA VERSION FINAL
         }
 
