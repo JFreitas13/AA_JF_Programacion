@@ -42,17 +42,17 @@ public class AddModifyClientServlet extends HttpServlet {
         try {
             if (action.equals("register")) {
                 clientDao.addClient(client);
-                out.println("<div class='alert alert-success' role='alert'>El cliente se ha añadido correctamente</div> \n <a href='showclients.jsp' class='btn btn-primary'>Listado Clientes</a>");
+                out.println("<div class='alert alert-success' role='alert'>El cliente se ha añadido correctamente \n <a href='showclients.jsp' >Listado Clientes</a>");
             } else {
                 clientDao.modifyById(Integer.parseInt(clientId), client); //paso id y nuevo cliente creado arriba
-                out.println("<div class='alert alert-success' role='alert'>El cliente se ha modificado correctamente</div> \n <a href='showclients.jsp' class='btn btn-primary'>Listado Clientes</a>");
+                out.println("<div class='alert alert-success' role='alert'>El cliente se ha modificado correctamente. \n <a href='showclients.jsp' >Listado Clientes</a>");
             }
         } catch (ClientAlreadyExistException caee) {
-            out.println("<div class='alert alert-warning' role='alert'>El cliente ya está registrado en el sistema.</div> \n <a href='showclients.jsp' class='btn btn-primary'>Listado Clientes</a>");
+            out.println("<div class='alert alert-warning' role='alert'>El cliente ya está registrado en el sistema. \n <a href='showclients.jsp' >Listado Clientes</a>");
         } catch (SQLException sqle) {
             out.println("<div class='alert alert-danger' role='alert'>No se ha podido conectar con la base de datos. Verifique que todos los datos son correctos</div>");
             sqle.printStackTrace(); //TODO QUITAR DE LA VERSION FINAL
         }
 
     }
-}
+}//<a href="/sanfrei/showclients.jsp">Listado de Clientes</a>

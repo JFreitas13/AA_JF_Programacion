@@ -37,7 +37,7 @@ public class AddProductServlet extends HttpServlet {
         try {
             Product product = new Product(nombre.trim(), precio, stock, supplierId.trim());
             productDao.add(product);
-            out.println("<div class='alert alert-success' role='alert'>Producto añadido correctamente</div> \n <a href='showproducts.jsp' class='btn btn-primary'>Listado Productos</a>");
+            out.println("<div class='alert alert-success' role='alert'>Producto añadido correctamente \n <a href='showproducts.jsp' >Listado Productos</a>");
         } catch (SQLException sqle) {
             out.println("<div class='alert alert-success' role='alert'>No se ha podido conectar con la base de datos. Verifique que todos los datos son correctos.</div>");
             sqle.printStackTrace();
